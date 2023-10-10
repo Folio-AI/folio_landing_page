@@ -25,12 +25,11 @@ export default function FeaturesHome() {
 
   return (
     <section id="0" className="relative pt-32">
-
       {/* Section background (needs .relative class on parent and next sibling elements) */}
-      <div className="absolute inset-0 bg-gray-100 pointer-events-none mb-16" aria-hidden="true"></div>
+      <div className="absolute inset-0 pointer-events-none mb-16" aria-hidden="true"></div>
       <div className="absolute left-0 right-0 m-auto w-px p-px h-20 bg-gray-200 transform -translate-y-1/2"></div>
 
-      <div className="relative max-w-6xl mx-auto px-4 sm:px-6">
+      <div className="relative max-w-6xl mx-auto px-4 sm:px-6 place-items-center">
         <div className="pt-12 md:pt-20">
 
           {/* Section header */}
@@ -39,7 +38,7 @@ export default function FeaturesHome() {
               Apply to Jobs Smarter
             </h1>
             <p className="text-xl text-gray-600">
-              Integrate your existing port<span className="font-bold">(folio)</span>s, automatically tailor your resumes and cover letters for unqiue job applications, automatically fill out role-specific job application questions, track your job applications.
+              Integrate your existing port<span className="font-bold">(folio)</span>s, automatically tailor your resumes and cover letters for unqiue job applications, automatically fill out role-specific job application questions, and track your job applications.
             </p>
           </div>
           
@@ -49,24 +48,24 @@ export default function FeaturesHome() {
           </div> */}
 
           {/* Section content */}
-          <div className="md:grid md:grid-cols-12 md:gap-6">
+          <div className="w-3/5 mx-auto">
 
             {/* Content */}
             <div className="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-7 lg:col-span-6 md:mt-6" data-aos="fade-right">
               <div className="md:pr-4 lg:pr-12 xl:pr-16 mb-8">
-                <h3 className="h3 mb-3">Supercharge your Job Applications</h3>
+                {/* <h3 className="h3 mb-3">Supercharge your Job Applications</h3> */}
                 <p className="text-xl text-gray-600"></p>
               </div>
               {/* Tabs buttons */}
               <div className="mb-8 md:mb-0">
                 <button
-                  className={`text-left flex items-center text-lg p-5 rounded border transition duration-300 ease-in-out mb-3 ${tab !== 1 ? 'bg-white shadow-md border-gray-200 hover:shadow-lg' : 'bg-gray-200 border-transparent'}`}
+                  className={`text-left flex items-center text-lg p-5 rounded border transition duration-300 ease-in-out mb-3 ${tab !== 1 ? 'bg-white shadow-md hover:shadow-lg' : 'bg-gradient-to-r from-cyan-500 to-blue-900'}`}
                   onClick={(e) => { e.preventDefault(); setTab(1); }}
                 >
                   <div>
-                    <div className="font-bold leading-snug tracking-tight mb-1">1. Build your Profile</div>
-                    <div className="text-gray-600">
-                      Connect your existing LinkedIn, HandShake, Github, Google Scholar, or DevPost portfolios seamlessly. Alternatively, fill out all of your work experience and profile info or upload an existing resume.
+                    <div className={`${tab == 1 ? 'text-white' : 'text-black'} font-bold leading-snug tracking-tight mb-1`}>1. Build your Profile</div>
+                    <div className={`${tab == 1 ? 'text-white' : 'text-gray-600'} font-light`}>
+                      Connect your existing LinkedIn, HandShake, Github, Google Scholar, or DevPost portfolios seamlessly. Or upload an existing resume.
                     </div>
                   </div>
                   <div className="flex justify-center items-center w-8 h-8 bg-white rounded-full shadow shrink-0 ml-3">
@@ -75,13 +74,20 @@ export default function FeaturesHome() {
                     </svg>
                   </div>
                 </button>
+
+                {/* Downward pointing SVG arrow that looks nice */}
+                <svg className="m-8 mx-auto" width="50" height="50" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M 10 10 L 25 30 L 40 10 Z" fill="none" stroke="black"/>
+                </svg>
+
+
                 <button
-                  className={`text-left flex items-center text-lg p-5 rounded border transition duration-300 ease-in-out mb-3 ${tab !== 2 ? 'bg-white shadow-md border-gray-200 hover:shadow-lg' : 'bg-gray-200 border-transparent'}`}
+                  className={`text-left flex items-center text-lg p-5 rounded border transition duration-300 ease-in-out mb-3 ${tab !== 2 ? 'bg-white shadow-md hover:shadow-lg' : 'bg-gradient-to-r from-cyan-500 to-blue-900'}`}
                   onClick={(e) => { e.preventDefault(); setTab(2); }}
                 >
                   <div>
-                    <div className="font-bold leading-snug tracking-tight mb-1">2. Automatically Apply to Jobs</div>
-                    <div className="text-gray-600">
+                    <div className={`${tab == 2 ? 'text-white' : 'text-black'} font-bold leading-snug tracking-tight mb-1`}>2. Automatically Apply to Jobs</div>
+                    <div className={`${tab == 2 ? 'text-white' : 'text-gray-600'} font-light`}>
                       Enter a job description, and we'll optimize your resume for applicant tracking system (ATS) keyword scans and tailor your resume for the job posting. We'll also automatically fill out your cover letters.
                     </div>
                   </div>
@@ -91,28 +97,30 @@ export default function FeaturesHome() {
                     </svg>
                   </div>
                 </button>
-                <button
+                {/* <button
                   className={`text-left flex items-center text-lg p-5 rounded border transition duration-300 ease-in-out mb-3 ${tab !== 3 ? 'bg-white shadow-md border-gray-200 hover:shadow-lg' : 'bg-gray-200 border-transparent'}`}
                   onClick={(e) => { e.preventDefault(); setTab(3); }}
                 >
                   <div>
                     <div className="font-bold leading-snug tracking-tight mb-1">3. Keep Track of Your Applications</div>
-                    <div className="text-gray-600">Keep track of all your job applications and keep your profile updated.</div>
+                    <div className="text-gray-600 font-medium">
+                      Keep track of all your job applications and keep your profile updated.
+                    </div>
                   </div>
                   <div className="flex justify-center items-center w-8 h-8 bg-white rounded-full shadow shrink-0 ml-3">
                     <svg className="w-3 h-3 fill-current" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
                       <path d="M11.334 8.06a.5.5 0 00-.421-.237 6.023 6.023 0 01-5.905-6c0-.41.042-.82.125-1.221a.5.5 0 00-.614-.586 6 6 0 106.832 8.529.5.5 0 00-.017-.485z" fill="#191919" fillRule="nonzero" />
                     </svg>
                   </div>
-                </button>
+                </button> */}
               </div>
             </div>
 
             {/* Tabs items */}
-            <div className="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-5 lg:col-span-6 mb-8 md:mb-0 md:order-1">
+            {/* <div className="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-5 lg:col-span-6 mb-8 md:mb-0 md:order-1">
               <div className="transition-all">
                 <div className="relative flex flex-col text-center lg:text-right" data-aos="zoom-y-out" ref={tabs}>
-                  {/* Item 1 */}
+                  
                   <Transition
                     show={tab === 1}
                     className="w-full"
@@ -132,7 +140,8 @@ export default function FeaturesHome() {
                       <Image className="md:max-w-none absolute w-full left-0 bottom-0 transform animate-float animation-delay-1000" src={FeaturesElement03} width={500} height={167} alt="Element 03" style={{ top: '77%' }} />
                     </div>
                   </Transition>
-                  {/* Item 2 */}
+                  
+
                   <Transition
                     show={tab === 2}
                     className="w-full"
@@ -152,7 +161,7 @@ export default function FeaturesHome() {
                       <Image className="md:max-w-none absolute w-full left-0 transform animate-float" src={FeaturesElement01} width={500} height={147} alt="Element 01" style={{ top: '79%' }} />
                     </div>
                   </Transition>
-                  {/* Item 3 */}
+                  
                   <Transition
                     show={tab === 3}
                     className="w-full"
@@ -176,8 +185,8 @@ export default function FeaturesHome() {
               </div>
             </div>
 
+          </div> */}
           </div>
-
         </div>
       </div>
     </section>

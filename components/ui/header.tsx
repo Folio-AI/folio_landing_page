@@ -31,7 +31,13 @@ export default function Header() {
           <div className="shrink-0 mr-4">
             <Logo />
           </div>
-          
+          <nav className="hidden md:flex md:grow">
+            <ul className="flex grow justify-end flex-wrap items-center">
+              <li>
+                <Link href="/pricing" className="text-gray-600 hover:text-gray-900 px-3 lg:px-5 py-2 flex items-center transition duration-150 ease-in-out">Pricing</Link>
+              </li>
+            </ul>
+          </nav>
           {
   /* 
   <nav className="hidden md:flex md:grow">

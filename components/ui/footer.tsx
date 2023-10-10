@@ -107,11 +107,12 @@ export default function Footer() {
               </div>
             </form>
           </div> */}
+          
 
         </div>
 
         
-        <div className="md:flex md:items-center md:justify-between py-4 md:py-8 border-t border-gray-200">
+        {/* <div className="md:flex md:items-center md:justify-between py-4 md:py-8 border-t border-gray-200">
 
           
           <ul className="flex mb-4 md:order-1 md:ml-4 md:mb-0">
@@ -138,10 +139,9 @@ export default function Footer() {
             </li>
           </ul>
 
-          {/* Copyrights note */}
           <div className="text-sm text-gray-600 mr-4">&copy; Folio AI. All rights reserved.</div>
 
-        </div>
+        </div> */}
 
       </div>
     </footer>
