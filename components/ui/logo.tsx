@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import LogoImg from '@/public/images/folio_ai_logo.png'
+import LogoImg from '@/public/images/folio_ai_logo_transparent_bg.png'
 
 export default function Logo() {
   return (
