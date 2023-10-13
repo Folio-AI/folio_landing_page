@@ -160,7 +160,7 @@ async function getOpenAIChatCompletion({
 function extractJSONFromResumePrompt(resumeRawText: string) {
   return `You are an expert resume parser. 
 
-You will be provided with text representing a candidate's resume, delimited by triple quotes. Summarize the text into a JSON with exactly the following schema:
+You will be provided with text representing a candidate's resume, delimited by triple quotes. Summarize the text into a JSON with the following schema:
 
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
@@ -178,12 +178,10 @@ You will be provided with text representing a candidate's resume, delimited by t
                         "type": "string"
                     },
                     "start": {
-                        "type": "string",
-                        "format": "date-time"
+                        "type": "string"
                     },
                     "end": {
-                        "type": "string",
-                        "format": "date-time"
+                        "type": "string"
                     },
                     "location": {
                         "type": "string"
@@ -204,31 +202,30 @@ You will be provided with text representing a candidate's resume, delimited by t
                 "type": "object",
                 "properties": {
                     "company": {
-                        "type": "string"
+                      "type": "string"
                     },
                     "title": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "The name of the project."
                     },
                     "start": {
-                        "type": "string",
-                        "format": "date-time"
+                        "type": "string"
                     },
                     "end": {
- {
-                        "type": "string",
-                        "format": "date-time"
+                        "type": "string"
                     },
                     "location": {
-                        "type": "string"
+                      "type": "string"
                     },
                     "description": {
                         "type": "array",
+                        "description": "List of bullet points of what was done for project.",
                         "items": {
                             "type": "string"
                         }
                     }
                 },
-                "required": ["company", "title", "start", "end", "location", "description"]
+                "required": ["title", "start", "end", "description"]
             }
         }
     },
@@ -238,7 +235,6 @@ You will be provided with text representing a candidate's resume, delimited by t
 
 You will follow these rules when parsing the resume::
 - If you cannot find a value for a particular JSON key, leave that key-value as an empty whitespace.
-= For each summary section of a work experience, combine all the bullet points into one single sentence and REMOVE bullet points if present.
 
 You will output only this JSON object.
 

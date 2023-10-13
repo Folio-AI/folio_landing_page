@@ -11,11 +11,9 @@ interface Experience {
 }
 
 interface Project {
-    company: string;
     title: string;
     start: string;
     end: string;
-    location: string;
     description: string[];
 }
 
@@ -98,18 +96,16 @@ const ResumeEditor: React.FC<Props> = ({ resumeData, updateSharedState }) => {
     return (
         <div className="space-y-4">
             {(['Experience', 'Projects'] as Array<keyof ResumeData>).map((section) => (
-                <div key={section} className="p-5 rounded-md">
+                <div key={section} className="p-4 rounded-md">
                     <h2 className="font-bold text-black text-xl mb-4">{section}</h2>
-                    <div className="">
+                    <div className="space-y-2">
                         {localResumeData[section].map((item, index) => (
-                            <div key={index} className="p-6 bg-gray-100 border-teal-500 border rounded-md mb-4 shadow-lg">
+                            <div key={index} className="p-3 bg-gray-100 border-teal-500 border rounded-md mb-4 shadow-lg">
                                 <h3 className="font-bold text-lg text-black">{item.title}</h3>
-                                <h3 className="text-sm italic mb-3">{item.company}</h3>
-                                <hr style={{border: 'none', height: '1px', background: '#14b8a6'}}/>
-                                <br />
+                                <h3 className="text-sm italic">{item.company}</h3>
                                 {item.description.map((desc, descIndex) => (
                                     <div key={descIndex}>
-                                       <textarea 
+                                        <textarea 
                                             value={desc} 
                                             onChange={(e) => 
                                                 updateDescription(section, index, descIndex, e.target.value)}

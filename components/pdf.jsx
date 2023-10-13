@@ -45,6 +45,7 @@ const styles = StyleSheet.create({
   },
   location: {
     fontFamily: "Times-Roman",
+    fontStyle: "bold",
     flex: 1,
     textAlign: 'right',
   },
@@ -79,19 +80,23 @@ const BulletPoint = ({ text }) => (
 const Item = ({ item }) => (
   <View style={styles.space}>
     <View style={styles.row}>
-      <Text style={styles.company}>
-        {item.company}
-      </Text>
-      <Text style={styles.location}>
-        {item.location}
-      </Text>
+      {styles.company && (
+          <Text style={styles.company}>
+            {item.company}
+          </Text>
+      )}
+      {styles.location && (
+        <Text style={styles.location}>
+          {item.location}
+        </Text>
+      )}
     </View>
     <View style={styles.row}>
-      <Text style={styles.jobTitle}>
+      <Text style={[styles.jobTitle, item.type === 'project' && styles.bolded]}>
         {item.title}
       </Text>
       <Text style={styles.dateRange}>
-        ({item.start} - {item.end})
+        {item.start} - {item.end}
       </Text>
     </View>
     {item.description.map((text, index) => (
@@ -119,10 +124,7 @@ const EducationSection = ({ info }) => (
           {info.start} - {info.end}
         </Text>
       </View>
-    <Text style={styles.bolded}>Relevant Coursework: </Text>
-    <Text>
-      {info.relevantCoursework.join(', ')}
-    </Text>
+    <BulletPoint text={`Relevant Coursework: ${info.relevantCoursework.join(', ')}`} />
   </View>
 );
 
