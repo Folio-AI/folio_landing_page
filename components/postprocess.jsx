@@ -10,11 +10,9 @@ import "react-pdf/dist/esm/Page/TextLayer.css";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
-export default function Postprocess() {
-  const [sharedState, setSharedState] = useState(exampleData);
-  const [editor, setEditor] = useState(<ResumeEditor resumeData={exampleData} updateSharedState={setSharedState}/>)
-  const [linkToPDFBlob, setLinkToPDFBlob] = useState(null);
-  const [docLoading, setDocLoading] = useState(false);
+export default function Postprocess({inputData}) {
+  const [sharedState, setSharedState] = useState(inputData);
+  const [editor, setEditor] = useState(<ResumeEditor resumeData={inputData} updateSharedState={setSharedState}/>)
   const [document, setDocument] = useState(null);
   const [currPage, setCurrPage] = useState(null);
   const [delayedSharedState, setDelayedSharedState] = useState(sharedState);
@@ -85,16 +83,13 @@ export default function Postprocess() {
       
 
     <div className="border border-gray-300 rounded pr-4 col-span-1 shadow-xl">
-      {/* <button className="bg-green-400 hover:bg-teal-500 text-white font-bold py-2 px-4 rounded" onClick={handleRefresh}>
-              Refresh
-      </button> */}
 
         <div className="text-sm">
             {editor}
         </div>
     </div>
 
-    <div className="pl-4 border border-gray-300 rounded p-4 fixed col-span-1 right-10 shadow-2xl">
+    <div className="border border-gray-300 rounded p-4 fixed col-span-1 right-10 shadow-2xl">
         {document}
     </div>
 </div>

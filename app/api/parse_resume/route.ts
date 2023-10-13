@@ -151,15 +151,90 @@ async function getOpenAIChatCompletion({
   return response;
 }
 
+
+// {basic_info: {first_name, last_name, full_name, email, phone_number, location, portfolio_website_url, linkedin_url, github_url}, \
+// education: [{university, education_level (BA, BS, MS, or PhD), graduation_year, graduation_month, majors, GPA, relevant_coursework: []}], work_experience: \
+// [{title, company, location, start_date, end_date, summary}], research_experience: [{title, institution, location, start_date, end_date, summary}], project_experience:[{name, summary, link}], \
+// technical_skills: [], soft_skills: [], awards: []}
+
 function extractJSONFromResumePrompt(resumeRawText: string) {
   return `You are an expert resume parser. 
 
-You will be provided with text representing a candidate's resume, delimited by triple quotes. Summarize the text into a JSON with exactly the following structure:
+You will be provided with text representing a candidate's resume, delimited by triple quotes. Summarize the text into a JSON with exactly the following schema:
 
-{basic_info: {first_name, last_name, full_name, email, phone_number, location, portfolio_website_url, linkedin_url, github_url}, \
-education: [{university, education_level (BA, BS, MS, or PhD), graduation_year, graduation_month, majors, GPA, relevant_coursework: []}], work_experience: \
-[{title, company, location, start_date, end_date, summary}], research_experience: [{title, institution, location, start_date, end_date, summary}], project_experience:[{name, summary, link}], \
-technical_skills: [], soft_skills: [], awards: []}
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+        "Experience": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "company": {
+                        "type": "string"
+                    },
+                    "title": {
+                        "type": "string"
+                    },
+                    "start": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "end": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "location": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "required": ["company", "title", "start", "end", "location", "description"]
+            }
+        },
+        "Projects": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "company": {
+                        "type": "string"
+                    },
+                    "title": {
+                        "type": "string"
+                    },
+                    "start": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "end": {
+ {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "location": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "required": ["company", "title", "start", "end", "location", "description"]
+            }
+        }
+    },
+    "required": ["Experience", "Projects"]
+}
+
 
 You will follow these rules when parsing the resume::
 - If you cannot find a value for a particular JSON key, leave that key-value as an empty whitespace.
@@ -227,11 +302,12 @@ Then you will be given the experiences of a candidate for the job in JSON format
 
 You will tailor and rewrite the candidate's resume to match and align with the job description, highlighting experiences relevant to the job. \
 Rewrite the candidate's experiences' summaries to better match the job description's language. \
-Rewrite each experience summary to be more impressive and tailored for the given job role.
+Rewrite each experience summary to be more impressive and tailored for the given job role. \
 
 Follow these rules when rewriting:
 - DO NOT add work experiences if not present in the candidate's original resume.
 - DO NOT LIE about hard skills or include false information not present in the candidate's original resume.
+- Ensure that your response is valid JSON.
 
 ### Job Description:
 """${jobPostingText}"""
@@ -462,6 +538,14 @@ async function tailorResumePipeline(resumeRawText: string, jobPostingText: strin
   // const keywords = await extractKeywordsFromJobPosting(jobPostingText);
   // const tailoredResume = await tailorResumeFromKeywords(resumeJSON, keywords);
   const tailoredResume = await tailorResumeFromJobPosting(resumeJSON, jobPostingText, "gpt-3.5-turbo-instruct", 1);
+
+  if (!isValidJSON(resumeJSON)) {
+    throw new ResumeParserError({
+      name: "InvalidJSONError",
+      message: "Tailored resume JSON is invalid."
+    });
+  }
+
   console.log(tailoredResume);
 
   encoding.free();

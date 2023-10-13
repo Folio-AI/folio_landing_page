@@ -1,6 +1,6 @@
 export const metadata = {
-  title: 'Pricing - Simple',
-  description: 'Page description',
+  title: 'Pricing | Folio AI',
+  description: 'Folio AI.',
 }
 
 import PricingTables from '@/components/pricing-tables'

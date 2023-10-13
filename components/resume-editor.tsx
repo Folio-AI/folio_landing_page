@@ -104,7 +104,7 @@ const ResumeEditor: React.FC<Props> = ({ resumeData, updateSharedState }) => {
                         {localResumeData[section].map((item, index) => (
                             <div key={index} className="p-3 bg-gray-100 border-teal-500 border rounded-md mb-4 shadow-lg">
                                 <h3 className="font-bold text-lg text-black">{item.title}</h3>
-                                <h3 className="text-sm italic">{item.company}</h3>
+                                <h3 className="text-sm italic mb-3">{item.company}</h3>
                                 {item.description.map((desc, descIndex) => (
                                     <div key={descIndex}>
                                         <textarea 
