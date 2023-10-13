@@ -16,3 +16,33 @@
     }
 }
 
+/* Style the scrollbar */
+.scrollable-div::-webkit-scrollbar {
+    width: 4px;
+  }
+  
+  .scrollable-div::-webkit-scrollbar-track {
+    background: transparent; /* Makes the track transparent */
+  }
+  
+  .scrollable-div::-webkit-scrollbar-thumb {
+    background: transparent; /* Makes the thumb transparent */
+    border-radius: 10px; 
+    transition: background-color 0.3s, width 0.3s; /* Added transition */
+  }
+  
+  .scrollable-div:hover::-webkit-scrollbar-thumb {
+    background: rgba(85, 85, 85, 0.7); /* Brighter gray on hover */
+    width: 8px; /* Larger width on hover */
+  }
+  
+  /* For Firefox */
+  .scrollable-div {
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent; /* Makes both thumb and track transparent */
+  }
+  
+  .scrollable-div:hover {
+    scrollbar-color: rgba(85, 85, 85, 0.7) transparent; /* Brighter thumb color on hover */
+  }
+  
