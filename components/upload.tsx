@@ -68,6 +68,8 @@ export default function UploadArea({ updateStageFunction, setExperienceJSON }: U
   }
 
   const handleSubmit = async () => {
+    setUploadStatus('submitting');
+
     const response = await fetch('/api/parse_resume', {
       method: 'POST',
       headers: {
@@ -120,11 +122,11 @@ export default function UploadArea({ updateStageFunction, setExperienceJSON }: U
           <div data-aos="fade-up" className="text-xl text-slate-700 font-semibold mt-8 mb-2">Step 3: Let Us Do The Work</div>
           <button 
             data-aos="fade-up" 
-            className={`btn-sm px-4 py-2 rounded bg-sky-400 text-white shadow hover:bg-sky-500 ${uploadStatus === 'submitting' ? 'opacity-50 cursor-not-allowed' : ''}`} 
+            className={`btn-sm px-4 py-2 rounded bg-sky-400 text-white shadow hover:bg-sky-500`} 
             onClick={handleSubmit} 
-            disabled={uploadStatus === 'submitting'} // Disable the button when submitting
+            // disabled={uploadStatus === 'submitting'} // Disable the button when submitting
         >
-            {uploadStatus === 'submitting' ? 'Submitting... 🔄' : 'Submit'}
+            {uploadStatus === 'submitting' ? 'Loading...' : 'Submit'}
         </button>
         </div>
       </div>

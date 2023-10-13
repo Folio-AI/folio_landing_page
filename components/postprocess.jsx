@@ -13,6 +13,8 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/$
 export default function Postprocess({inputData}) {
   const [sharedState, setSharedState] = useState(inputData);
   const [editor, setEditor] = useState(<ResumeEditor resumeData={inputData} updateSharedState={setSharedState}/>)
+  const [linkToPDFBlob, setLinkToPDFBlob] = useState(null);
+  const [docLoading, setDocLoading] = useState(false);
   const [document, setDocument] = useState(null);
   const [currPage, setCurrPage] = useState(null);
   const [delayedSharedState, setDelayedSharedState] = useState(sharedState);
@@ -83,6 +85,9 @@ export default function Postprocess({inputData}) {
       
 
     <div className="border border-gray-300 rounded pr-4 col-span-1 shadow-xl">
+      {/* <button className="bg-green-400 hover:bg-teal-500 text-white font-bold py-2 px-4 rounded" onClick={handleRefresh}>
+              Refresh
+      </button> */}
 
         <div className="text-sm">
             {editor}
