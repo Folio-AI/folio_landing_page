@@ -33,19 +33,19 @@ export default function FeaturesHome() {
         <div className="pt-12 md:pt-20">
 
           {/* Section header */}
-          <div className="max-w-3xl mx-auto text-center pb-12 md:pb-16">
+          <div className="max-w-3xl mx-auto text-center md:pb-16">
             <h1 className="h2 mb-4">
               Apply to Jobs Smarter
             </h1>
             <p className="text-xl text-gray-600">
-              Integrate your existing port<span className="font-bold">(folio)</span>s, automatically tailor your resumes and cover letters for unqiue job applications, automatically fill out role-specific job application questions, and track your job applications.
+              Integrate your existing port<span className="font-bold">(folio)</span>s and automatically tailor your resumes and cover letters for job roles.
             </p>
           </div>
           
           {/* Top image */}
-          {/* <div className="pb-12 md:pb-16">
+          <div className="pb-12 md:pb-16">
             <Image src={TopImage} width={1104} alt="Features top" />
-          </div> */}
+          </div> 
 
           {/* Section content */}
           <div className="w-3/5 mx-auto">
@@ -65,7 +65,7 @@ export default function FeaturesHome() {
                   <div>
                     <div className={`${tab == 1 ? 'text-white' : 'text-black'} font-bold leading-snug tracking-tight mb-1`}>1. Build your Profile</div>
                     <div className={`${tab == 1 ? 'text-white' : 'text-gray-600'} font-light`}>
-                      Connect your existing LinkedIn, HandShake, Github, Google Scholar, or DevPost portfolios seamlessly. Or upload an existing resume.
+                      Connect your existing LinkedIn, HandShake, Github, Google Scholar, or DevPost portfolios. Or upload an existing resume.
                     </div>
                   </div>
                   <div className="flex justify-center items-center w-8 h-8 bg-white rounded-full shadow shrink-0 ml-3">
@@ -86,9 +86,9 @@ export default function FeaturesHome() {
                   onClick={(e) => { e.preventDefault(); setTab(2); }}
                 >
                   <div>
-                    <div className={`${tab == 2 ? 'text-white' : 'text-black'} font-bold leading-snug tracking-tight mb-1`}>2. Automatically Apply to Jobs</div>
+                    <div className={`${tab == 2 ? 'text-white' : 'text-black'} font-bold leading-snug tracking-tight mb-1`}>2. Tailor Your Resumes</div>
                     <div className={`${tab == 2 ? 'text-white' : 'text-gray-600'} font-light`}>
-                      Enter a job description, and we'll optimize your resume for applicant tracking system (ATS) keyword scans and tailor your resume for the job posting. We'll also automatically fill out your cover letters.
+                      Enter a job description, and we'll optimize your resume for applicant tracking system (ATS) keyword scans and tailor your resume for the specific role.
                     </div>
                   </div>
                   <div className="flex justify-center items-center w-8 h-8 bg-white rounded-full shadow shrink-0 ml-3">
