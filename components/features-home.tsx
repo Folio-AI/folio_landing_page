@@ -43,9 +43,9 @@ export default function FeaturesHome() {
           </div>
           
           {/* Top image */}
-          <div className="pb-12 md:pb-16">
+          {/* <div className="pb-12 md:pb-16">
             <Image src={TopImage} width={1104} alt="Features top" />
-          </div> 
+          </div>  */}
 
           {/* Section content */}
           <div className="w-3/5 mx-auto">
