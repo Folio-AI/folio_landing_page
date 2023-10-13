@@ -139,7 +139,7 @@ export default function UploadArea({ updateStageFunction, setExperienceJSON }: U
             Upload
           </label>
           {uploadStatus === 'uploading' && <div className="mt-2 text-blue-600">Uploading...</div>}
-          {uploadStatus === 'success' || uploadStatus == 'submitting' && <div className="mt-2 text-green-800">Upload successful!</div>}
+          {(uploadStatus === 'success' || uploadStatus == 'submitting') && <div className="mt-2 text-green-800">Upload successful!</div>}
         </div>
 
 
