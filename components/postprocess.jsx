@@ -81,10 +81,10 @@ export default function Postprocess({inputData}) {
 
 
   return (
-    <div className="grid grid-cols-2 gap-4">
+    <div className="grid grid-cols-3 gap-40">
       
 
-    <div className="border border-gray-300 rounded pr-4 col-span-1 shadow-xl">
+    <div className="border border-gray-300 rounded pr-4 col-span-2 shadow-xl">
       {/* <button className="bg-green-400 hover:bg-teal-500 text-white font-bold py-2 px-4 rounded" onClick={handleRefresh}>
               Refresh
       </button> */}

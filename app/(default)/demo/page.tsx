@@ -48,15 +48,10 @@ useEffect(() => {
 return (
     <>
     <title>Tailor Resume | Folio AI</title>
-    <section id="resumeEditor" className="mb-44">
-        <div className="text-center mt-44">
-            <h1 className="text-5xl md:text-6xl font-extrabold leading-tighter tracking-tighter" data-aos="zoom-y-out">
-              Tailor <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-teal-400">Resume</span>
-            </h1>
-        </div>
-        <div className="mt-14">
+    <section id="resumeEditor" className="pt-10">
+        <div>
             {stage === 2 ?
-                <div ref={postProcessRef} className="max-w-6xl mx-auto px-4 sm:px-6 relative pb-24 md:pb-32">
+                <div ref={postProcessRef} className="max-w-6xl mx-auto px-4 sm:px-6 relative pt-20 pb-24 md:pt-24 md:pb-32">
                     <Postprocess inputData={experience}/>
                 </div> : <UploadArea updateStageFunction={setStage} setExperienceJSON={setExperience}/>
             }

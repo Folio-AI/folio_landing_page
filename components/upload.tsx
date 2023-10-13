@@ -90,18 +90,22 @@ export default function UploadArea({ updateStageFunction, setExperienceJSON }: U
   }
 
   return (
-    <div className="flex flex-col items-center justify-center">
+    <div className="flex flex-col items-center justify-center mt-44">
+      <h1 className="text-5xl md:text-5xl font-extrabold leading-tighter tracking-tighter mb-12" data-aos="zoom-y-out">
+          Tailor <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-teal-400">Resume</span>
+      </h1>
+
       <div className="flex flex-row w-full max-w-5xl p-8 bg-white shadow-2xl rounded-lg border-2 border-teal-400">
         {/* Left Section */}
         <div className="flex flex-col items-start w-1/3 pr-8">
           {/* Step 1: Upload Button */}
           <div data-aos="fade-up" className="text-xl text-slate-700 font-semibold mb-2">Step 1: Upload Your Resume</div>
-          <button data-aos="fade-up" className="w-full flex justify-center items-center px-4 py-2 bg-gradient-to-r from-blue-500 to-teal-400 hover:from-blue-600 hover:to-teal-500 text-white rounded-lg shadow-lg tracking-wide cursor-pointer">
+          <label data-aos="fade-up" className="w-full flex justify-center items-center px-4 py-2 bg-gradient-to-r from-blue-500 to-teal-400 hover:from-blue-600 hover:to-teal-500 text-white rounded-lg shadow-lg tracking-wide cursor-pointer">
             <input type="file" className="hidden" onChange={handleUpload} />
             Upload
-          </button>
+          </label>
           {uploadStatus === 'uploading' && <div className="mt-2 text-blue-600">Uploading... <span className="animate-spin">🔄</span></div>}
-          {uploadStatus === 'success' && <div className="mt-2 text-green-600">Upload successful! ✅</div>}
+          {uploadStatus === 'success' && <div className="mt-2 text-green-600">Upload successful!</div>}
         </div>
 
 
