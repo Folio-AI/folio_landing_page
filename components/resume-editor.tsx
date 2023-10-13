@@ -98,12 +98,13 @@ const ResumeEditor: React.FC<Props> = ({ resumeData, updateSharedState }) => {
     return (
         <div className="space-y-4">
             {(['Experience', 'Projects'] as Array<keyof ResumeData>).map((section) => (
-                <div key={section} className="p-4 bg-gray-100 rounded-md">
-                    <h2 className="font-bold text-black">{section}</h2>
+                <div key={section} className="p-4 rounded-md">
+                    <h2 className="font-bold text-black text-xl mb-4">{section}</h2>
                     <div className="space-y-2">
                         {localResumeData[section].map((item, index) => (
-                            <div key={index} className="p-3 bg-gray-200 rounded-md">
-                                <h3 className="font-bold text-black">{item.company} - {item.title}</h3>
+                            <div key={index} className="p-3 bg-gray-100 border-teal-500 border rounded-md mb-4 shadow-lg">
+                                <h3 className="font-bold text-lg text-black">{item.title}</h3>
+                                <h3 className="text-sm italic">{item.company}</h3>
                                 {item.description.map((desc, descIndex) => (
                                     <div key={descIndex}>
                                         <textarea 
@@ -111,7 +112,7 @@ const ResumeEditor: React.FC<Props> = ({ resumeData, updateSharedState }) => {
                                             onChange={(e) => 
                                                 updateDescription(section, index, descIndex, e.target.value)}
                                             onInput={handleInput}
-                                            className="p-2 rounded-md text-black border border-gray-300 w-full"
+                                            className="text-sm p-2 rounded-md text-black border border-gray-300 w-full shadow-md focus:ring-green-400"
                                             style={{ overflow: 'hidden', resize: 'none' }} // Added to hide the scrollbar and disable resizing
                                         />
                                     </div>
