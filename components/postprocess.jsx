@@ -50,7 +50,7 @@ function ProcessBox() {
 
   useEffect(() => {
     async function updatePDF() {
-      const pdfComponent = <ResumePDF bio={candidateInfo} data={sharedState}/>;
+      const pdfComponent = <ResumePDF bio={candidateInfo} data={delayedSharedState}/>;
       const pdfObject = pdf(pdfComponent);
       const pdfBlob = await pdfObject.toBlob();
       const urlToPDFBlob = URL.createObjectURL(pdfBlob);
