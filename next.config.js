@@ -1,6 +1,12 @@
 const { withContentlayer } = require('next-contentlayer')
 
 /** @type {import('next').NextConfig} */
-const nextConfig = {}
+const nextConfig = {
+    webpack : (config) => {
+        config.resolve.alias.canvas = false;
 
-module.exports = withContentlayer(nextConfig)
+        return config;
+    }
+}
+
+module.exports = nextConfig
