@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import ResumeEditor from './resume-editor';
 import ResumePDF from './pdf';
 import { Document, Page } from 'react-pdf';
@@ -10,7 +10,7 @@ import "react-pdf/dist/esm/Page/TextLayer.css";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
-export default function Postprocess() {
+function ProcessBox() {
   const [sharedState, setSharedState] = useState(exampleData);
   const [editor, setEditor] = useState(<ResumeEditor resumeData={exampleData} updateSharedState={setSharedState}/>)
   const [linkToPDFBlob, setLinkToPDFBlob] = useState(null);
@@ -32,23 +32,6 @@ export default function Postprocess() {
     setDelayedSharedState(sharedState);
   }
 
-  function handleDownloadAsWord() {
-    // Implement the download as Word logic here
-    console.log('Download as Word clicked');
-  }
-
-  function handleDownloadAsPDF() {
-    // Implement the download as PDF logic here
-    console.log('Download as PDF clicked');
-  }
-
-  function derenderDownload() {
-    setDocLoading(true);
-  }
-
-  function renderDownload() {
-    setDocLoading(false);
-  }
 
   useEffect(() => {
     async function renderPDF() {
@@ -58,7 +41,7 @@ export default function Postprocess() {
       const urlToPDFBlob = URL.createObjectURL(pdfBlob);
       setLinkToPDFBlob(urlToPDFBlob);
       const page = <Page loading={currPage} pageNumber={1} width={500} renderAnnotationLayer={false} />;
-      const doc = <Document file={urlToPDFBlob} loading={derenderDownload} onLoadProgress={derenderDownload} onLoadSuccess={renderDownload}>{page}</Document>
+      const doc = <Document file={urlToPDFBlob} loading={document}>{page}</Document>
       setDocument(doc);
       setCurrPage(page);
     }
@@ -67,7 +50,7 @@ export default function Postprocess() {
 
   useEffect(() => {
     async function updatePDF() {
-      const pdfComponent = <ResumePDF bio={candidateInfo} data={delayedSharedState}/>;
+      const pdfComponent = <ResumePDF bio={candidateInfo} data={sharedState}/>;
       const pdfObject = pdf(pdfComponent);
       const pdfBlob = await pdfObject.toBlob();
       const urlToPDFBlob = URL.createObjectURL(pdfBlob);
@@ -78,6 +61,7 @@ export default function Postprocess() {
     }
     updatePDF();
   }, [delayedSharedState]);
+  
 
 
   return (
@@ -92,11 +76,12 @@ export default function Postprocess() {
       </div>
       <div className="w-1/2 pl-4 border border-gray-300 rounded p-4">
         {document}
-        {!docLoading &&
-        <div className="mt-4">
-        </div>}
       </div>
     </div>
   );
   
+}
+
+export default function Postprocess() {
+  return ProcessBox();
 }
