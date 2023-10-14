@@ -31,21 +31,24 @@ export default function Header() {
           <div className="shrink-0 mr-4">
             <Logo />
           </div>
-          <nav className="hidden md:flex md:grow">
+          {/* <nav className="hidden md:flex md:grow">
             <ul className="flex grow justify-end flex-wrap items-center">
               <li>
                 <Link href="/demo" className="text-gray-600 hover:text-gray-900 px-3 lg:px-5 py-2 flex items-center transition duration-150 ease-in-out">Demo</Link>
               </li>
             </ul>
-          </nav>
+          </nav> */}
           {
-  /* 
+   
   <nav className="hidden md:flex md:grow">
     <ul className="flex grow justify-end flex-wrap items-center">
       <li>
-        <Link href="/pricing" className="text-gray-600 hover:text-gray-900 px-3 lg:px-5 py-2 flex items-center transition duration-150 ease-in-out">Pricing</Link>
+        <Link href="/demo" className="text-gray-600 hover:text-gray-900 px-3 lg:px-5 py-2 flex items-center transition duration-150 ease-in-out">Demo</Link>
       </li>
       <li>
+        <Link href="/pricing" className="text-gray-600 hover:text-gray-900 px-3 lg:px-5 py-2 flex items-center transition duration-150 ease-in-out">Pricing</Link>
+      </li>
+      {/* <li>
         <Link href="/about" className="text-gray-600 hover:text-gray-900 px-3 lg:px-5 py-2 flex items-center transition duration-150 ease-in-out">About us</Link>
       </li>
       <li>
@@ -55,8 +58,8 @@ export default function Header() {
       </li>
       <li>
         <Link href="/blog" className="text-gray-600 hover:text-gray-900 px-3 lg:px-5 py-2 flex items-center transition duration-150 ease-in-out">Blog</Link>
-      </li>
-      <Dropdown title="Resources">
+      </li> */}
+      {/* <Dropdown title="Resources">
         <li>
           <Link href="/documentation" className="font-medium text-sm text-gray-600 hover:text-gray-900 flex py-2 px-5 leading-tight">Documentation</Link>
         </li>
@@ -66,7 +69,7 @@ export default function Header() {
         <li>
           <Link href="/404" className="font-medium text-sm text-gray-600 hover:text-gray-900 flex py-2 px-5 leading-tight">404</Link>
         </li>
-      </Dropdown>
+      </Dropdown> */}
     </ul>
     <ul className="flex grow justify-end flex-wrap items-center">
       <li>
@@ -82,7 +85,7 @@ export default function Header() {
       </li>
     </ul>
   </nav> 
-  */
+  
 }
 
 

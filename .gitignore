@@ -40,4 +40,4 @@ next-env.d.ts
 .env
 
 # Ignore tests for building docx files
-app/api/build_docx
+app/api/build_docx/route.ts
