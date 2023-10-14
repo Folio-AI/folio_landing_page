@@ -13,28 +13,28 @@ export default function SignIn() {
 
           {/* Page header */}
           <div className="max-w-3xl mx-auto text-center pb-12 md:pb-20">
-            <h1 className="h1">Welcome back. We exist to make entrepreneurism easier.</h1>
+            <h1 className="h1">Log In</h1>
           </div>
 
           {/* Form */}
           <div className="max-w-sm mx-auto">
             <form>
-              <div className="flex flex-wrap -mx-3 mb-4">
+              <div className="flex flex-wrap -mx-3 mb-4" data-aos="zoom-y-out" data-aos-delay="150">
                 <div className="w-full px-3">
                   <label className="block text-gray-800 text-sm font-medium mb-1" htmlFor="email">Email</label>
                   <input id="email" type="email" className="form-input w-full text-gray-800" placeholder="Enter your email address" required />
                 </div>
               </div>
-              <div className="flex flex-wrap -mx-3 mb-4">
+              <div className="flex flex-wrap -mx-3 mb-4" data-aos="zoom-y-out" data-aos-delay="300">
                 <div className="w-full px-3">
                   <div className="flex justify-between">
                     <label className="block text-gray-800 text-sm font-medium mb-1" htmlFor="password">Password</label>
-                    <Link href="/reset-password" className="text-sm font-medium text-blue-600 hover:underline">Having trouble signing in?</Link>
+                    <Link href="/reset-password" className="text-sm font-medium text-blue-600 hover:underline">Forgot password?</Link>
                   </div>
                   <input id="password" type="password" className="form-input w-full text-gray-800" placeholder="Enter your password" required />
                 </div>
               </div>
-              <div className="flex flex-wrap -mx-3 mb-4">
+              <div className="flex flex-wrap -mx-3 mb-4" data-aos="zoom-y-out" data-aos-delay="450">
                 <div className="w-full px-3">
                   <div className="flex justify-between">
                     <label className="flex items-center">
@@ -44,7 +44,7 @@ export default function SignIn() {
                   </div>
                 </div>
               </div>
-              <div className="flex flex-wrap -mx-3 mt-6">
+              <div className="flex flex-wrap -mx-3 mt-6" data-aos="zoom-y-out" data-aos-delay="600">
                 <div className="w-full px-3">
                   <button className="btn text-white bg-blue-600 hover:bg-blue-700 w-full">Sign in</button>
                 </div>
@@ -55,7 +55,7 @@ export default function SignIn() {
               <div className="text-gray-600 italic">Or</div>
               <div className="border-t border-gray-300 grow ml-3" aria-hidden="true"></div>
             </div>
-            <form>
+            <form data-aos="zoom-y-out" data-aos-delay="600">
               <div className="flex flex-wrap -mx-3 mb-3">
                 <div className="w-full px-3">
                   <button className="btn px-0 text-white bg-gray-900 hover:bg-gray-800 w-full relative flex items-center">
