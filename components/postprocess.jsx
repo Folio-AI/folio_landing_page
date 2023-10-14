@@ -5,10 +5,37 @@ import ResumePDF from './pdf';
 import { Document, Page } from 'react-pdf';
 import { pdfjs } from 'react-pdf';
 import { pdf } from '@react-pdf/renderer';
-import { candidateInfo, exampleData } from '@/app/api/build_docx/testData'
+// import { candidateInfo, exampleData } from '@/app/api/build_docx/testData'
 import "react-pdf/dist/esm/Page/TextLayer.css";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
+
+const candidateInfo = {
+  Bio : {
+      name : "Roshun Sunder",
+      address : "1234 Main Street, Berkeley, CA 94704",
+      phone : "123-456-7890",
+      email : "roshun.sunder@gmail.com",
+      website : "https://roshunsunder.com"
+  },
+  Education : {
+      "institution": "University of California, Berkeley",
+      "degree": "Bachelor of Arts",
+      "major": "Computer Science",
+      "minor": "Data Science",
+      "start": "August 2019",
+      "end": "May 2023",
+      "location": "Berkeley, CA",
+      "relevantCoursework": [
+          "Data Structures",
+          "Discrete Mathematics",
+          "Linear Algebra",
+          "Machine Learning",
+          "Probability Theory",
+          "Statistical Inference"
+      ]
+  }
+};
 
 export default function Postprocess({inputData}) {
   const [sharedState, setSharedState] = useState(inputData);
