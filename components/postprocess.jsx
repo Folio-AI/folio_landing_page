@@ -104,7 +104,7 @@ return (
   <>
   <button className="bg-teal-600 hover:bg-teal-800 text-white font-bold py-2 px-4 rounded mb-5">
         Download (Word)
-    </button>
+  </button>
     
   <div className="grid grid-cols-3 gap-40">
     

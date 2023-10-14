@@ -152,6 +152,16 @@ const ResumePDF = ({ data, bio }) => (
           ))}
         </View>
       ))}
+      
+      <Text style={styles.sectionHeader}>SKILLS</Text>
+      <View style={styles.row}>
+      <Text style={styles.bolded}>Tech: </Text>
+      <Text>Python (Numpy, Pandas, Django), Java, JavaScript (Node, React/React Native, Express), C/C++, SQL, Linux, AWS EC2</Text>
+      </View>
+      <View style={styles.row}>
+      <Text style={styles.bolded}>Engineering: </Text>
+      <Text>ML/AI Development, Android and iOS development, Web Applications</Text>
+      </View>
     </Page>
   </Document>
 );
