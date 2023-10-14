@@ -14,6 +14,7 @@ interface Project {
     title: string;
     start: string;
     end: string;
+    company: string;
     description: string[];
 }
 

@@ -80,24 +80,48 @@ export default function Postprocess({inputData}) {
   }, [delayedSharedState]);
 
 
-  return (
-    <div className="grid grid-cols-3 gap-40">
+//   return (
+//     <div className="grid grid-cols-3 gap-40">
       
 
-    <div className="border border-gray-300 rounded pr-4 col-span-2 shadow-xl">
-      {/* <button className="bg-green-400 hover:bg-teal-500 text-white font-bold py-2 px-4 rounded" onClick={handleRefresh}>
-              Refresh
-      </button> */}
+//     <div className="border border-gray-300 rounded pr-4 col-span-2 shadow-xl">
+//       {/* <button className="bg-green-400 hover:bg-teal-500 text-white font-bold py-2 px-4 rounded" onClick={handleRefresh}>
+//               Refresh
+//       </button> */}
 
-        <div className="text-sm">
-            {editor}
-        </div>
-    </div>
+//         <div className="text-sm">
+//             {editor}
+//         </div>
+//     </div>
 
-    <div className="border border-gray-300 rounded p-4 fixed col-span-1 right-10 shadow-2xl">
-        {document}
-    </div>
+//     <div className="border border-gray-300 rounded p-4 fixed col-span-1 right-10 shadow-2xl">
+//         {document}
+//     </div>
+// </div>
+
+//   );
+return (
+  <>
+  <button className="bg-teal-600 hover:bg-teal-800 text-white font-bold py-2 px-4 rounded mb-5">
+        Download (Word)
+    </button>
+    
+  <div className="grid grid-cols-3 gap-40">
+    
+  <div className="border border-gray-300 rounded pr-4 col-span-2 shadow-xl">
+    {/* <button className="bg-green-400 hover:bg-teal-500 text-white font-bold py-2 px-4 rounded" onClick={handleRefresh}>
+            Refresh
+    </button> */}
+
+      <div className="text-sm">
+          {editor}
+      </div>
+  </div>
+
+  <div className="border border-gray-300 rounded p-4 fixed col-span-1 right-10 shadow-2xl">
+      {document}
+  </div>
 </div>
-
-  );
+</>
+);
 }
