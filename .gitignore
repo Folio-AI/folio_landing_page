@@ -38,3 +38,6 @@ next-env.d.ts
 # contentlayer
 .contentlayer
 .env
+
+# Ignore tests for building docx files
+app/api/build_docx

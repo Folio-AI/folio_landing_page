@@ -38,7 +38,6 @@
     "@types/aos": "^3.0.4",
     "autoprefixer": "^10.4.14",
     "docx": "^8.2.3",
-    "libreoffice-convert": "^1.4.1",
     "mammoth": "^1.6.0",
     "postcss": "^8.4.23",
     "sharp": "^0.32.6",
