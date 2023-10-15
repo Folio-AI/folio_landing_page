@@ -2,7 +2,9 @@
 import { getDocument } from 'pdfjs-dist';
 import React, { useState } from 'react';
 import mammoth from 'mammoth';
-import RingLoader from "react-spinners/ClipLoader";
+// import RingLoader from "react-spinners/ClipLoader";
+// import BlocksLoader from "react-spinners/ClipLoader";
+import RingLoader from "react-spinners/RingLoader";
 
 interface Experience {
   company: string;
@@ -170,7 +172,15 @@ export default function UploadArea({ updateStageFunction, setExperienceJSON }: U
         {uploadStatus === 'submitting' &&
             <div className="flex justify-center items-center mt-4">
                 {/* <div className="spinner" style={{border: '4px solid rgba(0, 0, 0, 0.1)', width: '36px', height: '36px', borderRadius: '50%', borderLeftColor: '#09f', animation: 'spin 1s linear infinite'}}></div> */}
-                <RingLoader />
+                <RingLoader color="#36d7b7" />
+                {/* <Blocks
+                  visible={true}
+                  height="80"
+                  width="80"
+                  ariaLabel="blocks-loading"
+                  wrapperStyle={{}}
+                  wrapperClass="blocks-wrapper"
+                /> */}
             </div>}
         </div>
       </div>
