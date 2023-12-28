@@ -52,7 +52,7 @@ export default function SignUp() {
 
   return (
     <section className="bg-gradient-to-b from-gray-100 to-white">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+      <div data-aos="fade-up" className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="pt-32 pb-12 md:pt-40 md:pb-20">
 
           {/* Page header */}
@@ -66,23 +66,23 @@ export default function SignUp() {
               <div className="flex flex-wrap -mx-3 mb-4">
                 <div className="w-1/2 px-3">
                   <label className="block text-gray-800 text-sm font-medium mb-1" htmlFor="firstName">First Name <span className="text-red-600">*</span></label>
-                  <input id="firstName" type="text" className="form-input w-full text-gray-800" placeholder="Enter your first name" required />
+                  <input id="firstName" type="text" className="form-input w-full text-gray-800" placeholder="Will" required />
                 </div>
                 <div className="w-1/2 px-3">
                   <label className="block text-gray-800 text-sm font-medium mb-1" htmlFor="lastName">Last Name <span className="text-red-600">*</span></label>
-                  <input id="lastName" type="text" className="form-input w-full text-gray-800" placeholder="Enter your last name" required />
+                  <input id="lastName" type="text" className="form-input w-full text-gray-800" placeholder="Das" required />
                 </div>
               </div>
               <div className="flex flex-wrap -mx-3 mb-4">
                 <div className="w-full px-3">
                   <label className="block text-gray-800 text-sm font-medium mb-1" htmlFor="email">Email <span className="text-red-600">*</span></label>
-                  <input id="email" type="email" className="form-input w-full text-gray-800" placeholder="Enter your email address" required />
+                  <input id="email" type="email" className="form-input w-full text-gray-800" placeholder="will@usefolio.ai" required />
                 </div>
               </div>
               <div className="flex flex-wrap -mx-3 mb-4">
                 <div className="w-full px-3">
                   <label className="block text-gray-800 text-sm font-medium mb-1" htmlFor="password">Password <span className="text-red-600">*</span></label>
-                  <input id="password" type="password" className="form-input w-full text-gray-800" placeholder="Enter your password" required />
+                  <input id="password" type="password" className="form-input w-full text-gray-800" placeholder="****" required />
                 </div>
               </div>
 
@@ -135,7 +135,7 @@ export default function SignUp() {
               </div>
             </form>
             <div className="text-gray-600 text-center mt-6">
-              Already using Simple? <Link href="/signin" className="text-blue-600 hover:underline transition duration-150 ease-in-out">Sign in</Link>
+              Already have an account? <Link href="/signin" className="text-blue-600 hover:underline transition duration-150 ease-in-out">Sign in</Link>
             </div>
           </div>
 
