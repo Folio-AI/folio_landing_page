@@ -12,7 +12,7 @@ export async function POST(request) {
     // Check if user already exists
     const existingUser = await db.collection('users').findOne({ email });
     if (existingUser) {
-      return new Response(JSON.stringify({ message: 'User already exists' }), {
+      return new Response(JSON.stringify({ message: 'The email you entered already exists. Sign in instead.' }), {
         status: 409,
         headers: {
           'Content-Type': 'application/json',
@@ -26,14 +26,14 @@ export async function POST(request) {
     // Insert new user
     await db.collection('users').insertOne({ email, password: hashedPassword });
 
-    return new Response(JSON.stringify({ message: 'User created successfully' }), {
+    return new Response(JSON.stringify({ message: 'User created successfully'}), {
       status: 200,
       headers: {
         'Content-Type': 'application/json',
       },
     });
   } catch (error) {
-    return new Response(JSON.stringify({ message: 'Internal server error' }), {
+    return new Response(JSON.stringify({ message: 'Something went wrong on our end. Please try again later.' }), {
       status: 500,
       headers: {
         'Content-Type': 'application/json',
