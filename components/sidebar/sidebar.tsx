@@ -54,7 +54,7 @@ export const SidebarWrapper = () => {
               <SidebarItem
                 isActive={pathname === "/dashboard/resume-builder"}
                 title="Resume Builder"
-                icon={<AccountsIcon />}
+                icon={<DevIcon />}
                 href="accounts"
               />
               <SidebarItem
@@ -94,7 +94,7 @@ export const SidebarWrapper = () => {
               <SidebarItem
                 isActive={pathname === "/dashboard/profile"}
                 title="Profile"
-                icon={<DevIcon />}
+                icon={<AccountsIcon />}
               />
               {/* <SidebarItem
                 isActive={pathname === "/view"}

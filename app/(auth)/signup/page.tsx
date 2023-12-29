@@ -10,6 +10,8 @@ import { useSession, signIn } from 'next-auth/react';
 
 import { redirect } from 'next/navigation'
 
+import { motion } from 'framer-motion';
+
 import Link from 'next/link';
 
 export default function SignUp() {
@@ -22,8 +24,11 @@ export default function SignUp() {
   const [errorMessage, setErrorMessage] = useState('');
   const [showModal, setShowModal] = useState(false);
 
+  const [loading, setLoading] = useState(false);
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setLoading(true);
 
     const form = event.target as HTMLFormElement;
     const firstNameInput = form.querySelector('#firstName') as HTMLInputElement;
@@ -59,6 +64,8 @@ export default function SignUp() {
 
       setShowModal(true);
     }
+
+    setLoading(false);
   };
 
   return (
@@ -134,7 +141,17 @@ export default function SignUp() {
 
               <div className="flex flex-wrap -mx-3 mt-6">
                 <div className="w-full px-3">
-                  <button className="btn text-white bg-blue-600 hover:bg-blue-700 w-full">Sign up</button>
+                  {/* <button className="btn text-white bg-blue-600 hover:bg-blue-700 w-full">Sign up</button> */}
+                  <motion.button
+                    whileTap={{ scale: 0.95 }}
+                    animate={{ opacity: loading ? 0.7 : 1 }}
+                    transition={{ duration: 0.5 }}
+                    className="btn text-white bg-blue-600 hover:bg-blue-700 w-full"
+                    type="submit"
+                    disabled={loading}
+                  >
+                    {loading ? "Loading..." : "Sign up"}
+                  </motion.button>
                 </div>
               </div>
               <div className="text-sm text-gray-500 text-center mt-3">

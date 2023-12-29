@@ -13,7 +13,7 @@ import { SES } from 'aws-sdk';
 export async function POST(request: Request) {
     try {
       const reqBody = await request.json();
-      const { email, password } = reqBody;
+      const { firstName, lastName, email, password } = reqBody;
   
       const db = (await clientPromise).db('test');
   
@@ -51,7 +51,7 @@ export async function POST(request: Request) {
         region: process.env.AWS_REGION
       });
 
-      const emailHtml = render(<VerifyEmail url={`http://localhost:3000/api/auth/verify?token=${verificationToken}`} />);
+      const emailHtml = render(<VerifyEmail firstName={firstName} inviteLink={`http://localhost:3000/api/auth/verify?token=${verificationToken}`} />);
 
       // Send verification email
       const params = {
