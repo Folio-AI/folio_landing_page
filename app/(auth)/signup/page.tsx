@@ -20,12 +20,21 @@ export default function SignUp() {
   }
 
   const [errorMessage, setErrorMessage] = useState('');
+  const [showModal, setShowModal] = useState(false);
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const email = event.target.email.value;
-    const password = event.target.password.value;
+    const form = event.target as HTMLFormElement;
+    const firstNameInput = form.querySelector('#firstName') as HTMLInputElement;
+    const lastNameInput = form.querySelector('#lastName') as HTMLInputElement;
+    const emailInput = form.querySelector('#email') as HTMLInputElement;
+    const passwordInput = form.querySelector('#password') as HTMLInputElement;
+
+    const firstName = firstNameInput.value;
+    const lastName = lastNameInput.value;
+    const email = emailInput.value;
+    const password = passwordInput.value;
 
     // Make the API request to your backend
     const response = await fetch('/api/auth/signup', {
@@ -33,7 +42,7 @@ export default function SignUp() {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ firstName, lastName, email, password }),
     });
 
     const data = await response.json();
@@ -42,16 +51,51 @@ export default function SignUp() {
       setErrorMessage(data.message);
     } else {
       // Sign in the user using NextAuth after successful registration
-      await signIn('credentials', {
-        redirect: false,
-        email,
-        password,
-      });
+      // await signIn('credentials', {
+      //   redirect: false,
+      //   email,
+      //   password,
+      // });
+
+      setShowModal(true);
     }
   };
 
   return (
     <section className="bg-gradient-to-b from-gray-100 to-white">
+      {showModal && (
+        <div className="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+        
+        <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
+          <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+            <div className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+              <div className="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
+                <div className="sm:flex sm:items-start">
+                  <div className="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-green-100 sm:mx-0 sm:h-10 sm:w-10">
+                    <svg className="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
+                    <h3 className="text-lg font-semibold leading-6 text-gray-900" id="modal-title">Verify Your Email</h3>
+                    <div className="mt-2">
+                      <p className="text-sm text-gray-500">Please check your email to verify your account. If you did not receive the email, you can <a href="#" className="text-green-600 hover:underline">resend the verification email</a>.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+                <button type="button" className="inline-flex w-full justify-center rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 sm:ml-3 sm:w-auto">Resend Email</button>
+                <button type="button" className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto" onClick={() => setShowModal(false)}>Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      )}
+
       <div data-aos="fade-up" className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="pt-32 pb-12 md:pt-40 md:pb-20">
 
@@ -82,7 +126,7 @@ export default function SignUp() {
               <div className="flex flex-wrap -mx-3 mb-4">
                 <div className="w-full px-3">
                   <label className="block text-gray-800 text-sm font-medium mb-1" htmlFor="password">Password <span className="text-red-600">*</span></label>
-                  <input id="password" type="password" className="form-input w-full text-gray-800" placeholder="****" required />
+                  <input id="password" type="password" className="form-input w-full text-gray-800" placeholder="Enter your password" required />
                 </div>
               </div>
 

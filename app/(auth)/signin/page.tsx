@@ -22,7 +22,7 @@ export default function SignIn() {
   const [password, setPassword] = useState('');
   const [loginError, setLoginError] = useState('');
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoginError('');
 
@@ -32,13 +32,15 @@ export default function SignIn() {
       password
     });
 
-    if (result.error) {
-      // Handle error responses here
-      setLoginError(result.error);
-      console.log('Failed to log in:', result.error);
-    } else {
-      // Redirect the user after successful login
-      window.location.href = '/dashboard';
+    if (result) {
+      if (result.error) {
+        // Handle error responses here
+        setLoginError(result.error);
+        console.log('Failed to log in:', result.error);
+      } else {
+        // Redirect the user after successful login
+        window.location.href = '/dashboard';
+      }
     }
   };
 

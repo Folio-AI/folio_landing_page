@@ -18,7 +18,7 @@ export default function Dashboard() {
     const [isDropdownOpen, setIsDropdownOpen] = useState(true);
 
     return (
-        <div className="flex h-screen bg-gray-100">
+        <div data-aos="fade-up" data-aos-duration="500" className="flex h-screen bg-gray-100">
             {/* Sidebar */}
             <div className="w-64 bg-white shadow-md">
                 {/* Sidebar content here */}
@@ -32,7 +32,7 @@ export default function Dashboard() {
                     <div className="relative">
                         <button onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
                             <Image
-                                src={session?.user?.image}
+                                src={session?.user?.image || ''}
                                 alt="Profile"
                                 width={40}
                                 height={40}

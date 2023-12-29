@@ -25,37 +25,39 @@ export const authOptions = {
               password: { label: "Password", type: "password" }
             },
             async authorize(credentials, req) {
-                console.log(credentials, req);
+                console.log("Credentials", credentials);
+                console.log("Req", req);
 
                 const dbPromise = await clientPromise;
                 const db = dbPromise.db("test");
 
-                // Find user by email
-                const user = await db.collection('users').findOne({ email: credentials.email });
-                if (!user) {
-                    throw new Error("The email and password you entered did not match our records. Please double-check and try again.");
-                }
+                if (credentials) {
+                    // Find user by email
+                    const user = await db.collection('users').findOne({ email: credentials.email });
+                    if (!user) {
+                        throw new Error("The email and password you entered did not match our records. Please double-check and try again.");
+                    }
 
-                // Validate password
-                const isValid = await bcrypt.compare(credentials.password, user.password);
-                
-                // Add logic here to look up the user from the credentials supplied
-                // const user = await db.collection('users').findOne({ email: credentials?.email, password: credentials?.password })
-        
-                if (isValid) {
-                    return user
+                    // Validate password
+                    const isValid = await bcrypt.compare(credentials.password, user.password);
+                    
+                    if (isValid) {
+                        return { ...user, id: user._id.toString() };
+                    } else {
+                        throw new Error("The email and password you entered did not match our records. Please double-check and try again.");
+                    }
                 } else {
-                    throw new Error("The email and password you entered did not match our records. Please double-check and try again.");
+                    throw new Error("Invalid request. Please try again.");
                 }
             }
         }),
         GitHubProvider({
-            clientId: process.env.GITHUB_ID,
-            clientSecret: process.env.GITHUB_SECRET
+            clientId: process.env.GITHUB_ID || '',
+            clientSecret: process.env.GITHUB_SECRET || ''
         }),
         GoogleProvider({
-            clientId: process.env.GOOGLE_ID,
-            clientSecret: process.env.GOOGLE_SECRET,
+            clientId: process.env.GOOGLE_ID || '',
+            clientSecret: process.env.GOOGLE_SECRET || '',
             authorization: {
                 params: {
                   prompt: "select_account",
@@ -63,8 +65,8 @@ export const authOptions = {
             },
         }),
         LinkedInProvider({
-            clientId: process.env.LINKEDIN_ID,
-            clientSecret: process.env.LINKEDIN_SECRET,
+            clientId: process.env.LINKEDIN_ID || '',
+            clientSecret: process.env.LINKEDIN_SECRET || '',
             authorization: {
                 params: { scope: 'openid profile email' },
               },
@@ -83,7 +85,7 @@ export const authOptions = {
         })
     ],
     callbacks: {
-        async signIn({ user, account, profile, email }) {
+        async signIn({ user, account, profile, email }: { user: any, account: any, profile: any, email: any }) {
             const dbPromise = await clientPromise;
             const db = dbPromise.db("test");
 
@@ -138,7 +140,7 @@ export const authOptions = {
             strategy: 'jwt'
         },
         debug: process.env.NODE_ENV === 'development',
-        async redirect({ url, baseUrl }) {
+        async redirect({ url, baseUrl } : { url: string, baseUrl: string }) {
             console.log("Redirecting", url, baseUrl);
 
             // Redirect to the dashboard after login
@@ -171,7 +173,7 @@ export const authOptions = {
           }
 
           return session;
-      }
+        }
     },
 }
 
