@@ -62,7 +62,7 @@ export async function POST(request: Request) {
         },
         Message: {
           Subject: {
-            Data: 'Folio AI - Verify Your Email'
+            Data: 'Folio AI - Confirm Your Account'
           },
           Body: {
             Html: {

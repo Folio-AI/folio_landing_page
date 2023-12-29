@@ -41,6 +41,9 @@ import { Inter, Inter_Tight } from 'next/font/google'
 import SessionProvider from '@/components/SessionProvider';
 import { getServerSession } from 'next-auth';
 
+import NextUIProvider from '@/components/NextUIProvider';
+import ThemeProvider from "@/components/next-themes";
+
 const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
@@ -55,10 +58,10 @@ const inter_tight = Inter_Tight({
   display: 'swap'
 })
 
-export const metadata = {
-  title: 'Folio AI',
-  description: '',
-}
+// export const metadata = {
+//   title: 'Folio AI',
+//   description: '',
+// }
 
 export default async function RootLayout({
   children,
@@ -68,11 +71,15 @@ export default async function RootLayout({
   const session = await getServerSession();
 
   return (
-    <html lang="en">
+    <html lang="en" className="light">
       <body className={`${inter.variable} font-inter antialiased bg-white text-gray-900 tracking-tight`}>
         <div className="flex flex-col min-h-screen overflow-hidden supports-[overflow:clip]:overflow-clip">
            <SessionProvider session={session}>
-              {children}
+              <ThemeProvider defaultTheme="light" attribute="class">
+                <NextUIProvider>
+                  {children}
+                </NextUIProvider>
+              </ThemeProvider> 
             </SessionProvider>
          </div>
       </body>
