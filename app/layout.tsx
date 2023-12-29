@@ -75,11 +75,11 @@ export default async function RootLayout({
       <body className={`${inter.variable} font-inter antialiased bg-white text-gray-900 tracking-tight`}>
         <div className="flex flex-col min-h-screen overflow-hidden supports-[overflow:clip]:overflow-clip">
            <SessionProvider session={session}>
-              <ThemeProvider defaultTheme="light" attribute="class">
+              {/* <ThemeProvider defaultTheme="dark" attribute="class"> */}
                 <NextUIProvider>
                   {children}
                 </NextUIProvider>
-              </ThemeProvider> 
+              {/* </ThemeProvider>  */}
             </SessionProvider>
          </div>
       </body>

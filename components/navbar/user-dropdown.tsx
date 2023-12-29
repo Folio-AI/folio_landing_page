@@ -19,13 +19,13 @@ export const UserDropdown = () => {
     <Dropdown>
       <NavbarItem>
         <DropdownTrigger>
-          <Avatar
-            as="button"
-            color="secondary"
-            size="md"
-            src={session?.user?.image || "https://i.pravatar.cc/150?u=a042581f4e29026704d"}
-            // src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
-          />
+            <Avatar
+              as="button"
+              color="secondary"
+              size="md"
+              src={session?.user?.image || "https://i.pravatar.cc/150?u=a042581f4e29026704d"}
+              // src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
+            />
         </DropdownTrigger>
       </NavbarItem>
       <DropdownMenu

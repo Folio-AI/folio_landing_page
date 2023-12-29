@@ -35,9 +35,9 @@ export const SidebarWrapper = () => {
         <div className={Sidebar.Overlay()} onClick={setCollapsed} />
       ) : null}
       <div
-        className={Sidebar({
+        className={`${Sidebar({
           collapsed: collapsed,
-        })}
+        })}`}
       >
         <div className={Sidebar.Header()}>
           <CompaniesDropdown />
