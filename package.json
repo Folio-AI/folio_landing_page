@@ -41,7 +41,6 @@
     "@types/aos": "^3.0.7",
     "@types/bcryptjs": "^2.4.6",
     "@types/jsonwebtoken": "^9.0.5",
-    "@types/next-auth": "^3.15.0",
     "@types/nodemailer": "^6.4.14",
     "autoprefixer": "^10.4.16",
     "aws-sdk": "^2.1527.0",
