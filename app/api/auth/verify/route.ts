@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 import clientPromise from '@/lib/mongodb'; // Adjust the path to your MongoDB client
 
-export async function GET(req) {
+export async function GET(req: Request) {
     const { searchParams } = new URL(req.url);
     const token = searchParams.get('token');
 
@@ -10,8 +10,12 @@ export async function GET(req) {
             throw new Error('Token is required for verification.');
         }
 
+        if (!process.env.JWT_SECRET) {
+            throw new Error('JWT_SECRET is not set.');
+        }
+
         // Decode the JWT token
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        const decoded = jwt.verify(token, process.env.JWT_SECRET) as jwt.JwtPayload;
         const db = (await clientPromise).db('test');
 
         // Find the user by email and verify if the token matches
@@ -40,7 +44,7 @@ export async function GET(req) {
         });
     } catch (error) {
         console.error(error);
-        return new Response(JSON.stringify({ message: error.message || 'Invalid or expired token.' }), {
+        return new Response(JSON.stringify({ message: (error as Error).message || 'Invalid or expired token.' }), {
             status: 400,
             headers: {
                 'Content-Type': 'application/json',
