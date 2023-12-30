@@ -133,7 +133,7 @@ const authOptions = {
                     });
                 }                
 
-                return Promise.resolve(true);
+                return true;
             } else {
                 // Create a new user in users collection using OAuth Profile info
                 const newUser = await db.collection('users').insertOne({
@@ -148,7 +148,7 @@ const authOptions = {
                     ...account
                 });
 
-                return Promise.resolve(true);
+                return true;
             }
         },
         async redirect({ url, baseUrl } : { url: string, baseUrl: string }) {
@@ -168,7 +168,7 @@ const authOptions = {
             return url;
         },
         async jwt({ token, user } : { token: any, user: any }) {
-            console.log("JWT", token, user);
+            console.log("JWT: Token + User", token, user);
           
             // Check if the user object exists, which indicates a new sign-in
             if (user) {
@@ -177,10 +177,11 @@ const authOptions = {
           
               // Fetch user details from the database
               const userDetails = await db.collection('users').findOne({ email: user.email });
-          
+            
               // Add user details to the token
               if (userDetails) {
                 token.user = userDetails;
+                console.log("New Token:", token)
               }
             }
           
