@@ -168,7 +168,8 @@ const authOptions = {
             return url;
         },
         async jwt({ token, user } : { token: any, user: any }) {
-            console.log("JWT: Token + User", token, user);
+            console.log("JWT Token", token)
+            console.log("JWT User", user);
           
             // Check if the user object exists, which indicates a new sign-in
             if (user) {
