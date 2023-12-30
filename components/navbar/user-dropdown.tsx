@@ -4,6 +4,7 @@ import {
   DropdownItem,
   DropdownMenu,
   DropdownTrigger,
+  DropdownSection,
   Navbar,
   NavbarItem,
 } from "@nextui-org/react";
@@ -22,7 +23,7 @@ export const UserDropdown = () => {
   });
 
   return (
-    <Dropdown>
+    <Dropdown showArrow>
       <NavbarItem>
         <DropdownTrigger>
             <Avatar
@@ -34,7 +35,48 @@ export const UserDropdown = () => {
             />
         </DropdownTrigger>
       </NavbarItem>
-      <DropdownMenu
+      <DropdownMenu variant="faded" aria-label="Dropdown menu with description">
+      <DropdownSection>  
+        <DropdownItem
+            key="new"
+            shortcut="⌘N"
+            description="Create a new resume"
+            // startContent={<AddNoteIcon className={iconClasses} />}
+          >
+            New Resume
+          </DropdownItem>
+          <DropdownItem
+            key="copy"
+            shortcut="⌘C"
+            description="Copy the file link"
+            // startContent={<CopyDocumentIcon className={iconClasses} />}
+          >
+            Copy link
+          </DropdownItem>
+          <DropdownItem
+            key="edit"
+            shortcut="⌘⇧E"
+            description="Allows you to edit the file"
+            // startContent={<EditDocumentIcon className={iconClasses} />}
+          >
+            Edit file
+          </DropdownItem>
+        </DropdownSection>
+        <DropdownSection>  
+          <DropdownItem
+            key="delete"
+            className="text-danger"
+            color="danger"
+            onClick={() => signOut()}
+            // shortcut="⌘⇧D"
+            // description="Sign Out"
+            // startContent={<DeleteDocumentIcon className={cn(iconClasses, "text-danger")} />}
+          >
+            Sign Out
+          </DropdownItem>
+        </DropdownSection>
+      </DropdownMenu>
+      {/* <DropdownMenu
         aria-label="User menu actions"
         onAction={(actionKey) => console.log({ actionKey })}
       >
@@ -45,19 +87,19 @@ export const UserDropdown = () => {
           <p>Signed in as</p>
           <p>{session?.user?.email}</p>
         </DropdownItem>
-        {/* <DropdownItem key="settings">My Settings</DropdownItem>
+        <DropdownItem key="settings">My Settings</DropdownItem>
         <DropdownItem key="team_settings">Team Settings</DropdownItem>
         <DropdownItem key="analytics">Analytics</DropdownItem>
         <DropdownItem key="system">System</DropdownItem>
         <DropdownItem key="configurations">Configurations</DropdownItem>
-        <DropdownItem key="help_and_feedback">Help & Feedback</DropdownItem> */}
+        <DropdownItem key="help_and_feedback">Help & Feedback</DropdownItem>
         <DropdownItem onClick={() => signOut()} key="logout" color="danger" className="text-danger ">
           Log Out
         </DropdownItem>
-        {/* <DropdownItem key="switch">
+        <DropdownItem key="switch">
           <DarkModeSwitch />
-        </DropdownItem> */}
-      </DropdownMenu>
+        </DropdownItem>
+      </DropdownMenu> */}
     </Dropdown>
     );
 };

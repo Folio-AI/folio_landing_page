@@ -3,7 +3,7 @@ import React from 'react';
 export default function LinkedAccounts() {
   
   return (
-    <div className="grid grid-cols-2 gap-4 md:grid-cols-4 p-16">
+    <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
       
         <div className="account-item border p-12 rounded-lg shadow-lg flex flex-col items-center justify-center">
           {/* GitHub SVG Icon */}

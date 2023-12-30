@@ -35,7 +35,7 @@ export default function DashboardLayout({
     <>
 
       <Layout>
-        <main className="grow">
+        <main className="grow p-32">
             {children}
         </main>
       </Layout>
