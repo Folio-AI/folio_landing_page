@@ -3,7 +3,9 @@
 import { Layout } from '@/components/layout/layout';
 
 import { useSession } from 'next-auth/react';
-import { redirect } from 'next/navigation'
+import { redirect } from 'next/navigation';
+
+import { useEffect } from 'react';
 
 import Loading from '@/components/utils/loading';
 
@@ -14,12 +16,16 @@ export default function DashboardLayout({
 }) {  
   // const router = useRouter();
   // Redirect page to home if not authenticaated on the server side
-  const { data : session, status } = useSession({
+  const { data : session, status, update } = useSession({
     required: true,
     onUnauthenticated() {
       redirect('/');
     }
   });
+
+  useEffect(() => {
+    update();
+  }, [])
 
   if (status == 'loading') {
     return <Loading />

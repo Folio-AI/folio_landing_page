@@ -58,10 +58,10 @@ const inter_tight = Inter_Tight({
   display: 'swap'
 })
 
-// export const metadata = {
-//   title: 'Folio AI',
-//   description: '',
-// }
+export const metadata = {
+  title: 'Folio AI',
+  description: '',
+}
 
 export default async function RootLayout({
   children,
