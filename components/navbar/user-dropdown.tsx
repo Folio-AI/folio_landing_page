@@ -11,10 +11,14 @@ import {
 import React from "react";
 
 import { useSession, signOut } from 'next-auth/react';
+import { redirect } from 'next/navigation';
 
 export const UserDropdown = () => {
   const { data: session, status } = useSession({
     required: true,
+    onUnauthenticated() {
+      redirect('/');
+    }
   });
 
   return (
