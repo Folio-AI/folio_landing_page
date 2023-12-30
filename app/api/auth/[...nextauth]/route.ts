@@ -8,14 +8,13 @@ import LinkedInProvider from 'next-auth/providers/linkedin';
 import clientPromise from "@/lib/mongodb"
 import { MongoDBAdapter } from "@auth/mongodb-adapter"
 
+import { Account, User } from 'next-auth';
+
+
 import bcrypt from 'bcryptjs';
 
-export const authOptions = {
+const authOptions = {
     // adapter: MongoDBAdapter(clientPromise),
-    session: {
-        // Use database sessions instead of JWT
-        strategy: "jwt"
-    },
     secret: process.env.NEXTAUTH_SECRET,
     providers: [
         CredentialsProvider({
@@ -90,7 +89,19 @@ export const authOptions = {
         })
     ],
     callbacks: {
-        async signIn({ user, account, profile, email }: { user: any, account: any, profile: any, email: any }) {
+        async signIn({
+            user,
+            account,
+            profile,
+            email,
+            credentials,
+          }: {
+            user: User,
+            account: Account | null,
+            profile?: any,
+            email?: any,
+            credentials?: any,
+          }) {
             const dbPromise = await clientPromise;
             const db = dbPromise.db("test");
 
@@ -102,7 +113,7 @@ export const authOptions = {
             // Check if the user already exists with a different account
             const existingUser = await db.collection('users').findOne({ email: user.email });
 
-            if (existingUser) {
+            if (existingUser && account) {
                 console.log(existingUser);
 
                 // Check if account is already linked
@@ -122,7 +133,7 @@ export const authOptions = {
                     });
                 }                
 
-                return true;
+                return Promise.resolve(true);
             } else {
                 // Create a new user in users collection using OAuth Profile info
                 const newUser = await db.collection('users').insertOne({
@@ -137,7 +148,7 @@ export const authOptions = {
                     ...account
                 });
 
-                return true;
+                return Promise.resolve(true);
             }
         },
         async redirect({ url, baseUrl } : { url: string, baseUrl: string }) {
@@ -156,7 +167,7 @@ export const authOptions = {
             // For other cases, return to the passed URL
             return url;
         },
-        async jwt({ token, user }) {
+        async jwt({ token, user } : { token: any, user: any }) {
             console.log("JWT", token, user);
           
             // Check if the user object exists, which indicates a new sign-in
@@ -175,7 +186,7 @@ export const authOptions = {
           
             return token;
         },
-        async session({ session, token }) {
+        async session({ session, token } : { session: any, token: any }) {
             console.log("Session", session);
             console.log("Token", token);
           
@@ -214,7 +225,7 @@ export const authOptions = {
     },
     pages: {
         signIn: '/signin'
-    }
+    },
 }
 
 const handler = NextAuth(authOptions);
