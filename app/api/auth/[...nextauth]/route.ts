@@ -167,63 +167,62 @@ const authOptions = {
             // For other cases, return to the passed URL
             return url;
         },
-        async jwt({ token, user } : { token: any, user: any }) {
-            console.log("JWT Token", token)
-            console.log("JWT User", user);
+        // async jwt({ token, user } : { token: any, user: any }) {
+        //     console.log("JWT Token", token)
+        //     console.log("JWT User", user);
           
-            // Check if the user object exists, which indicates a new sign-in
-            if (user) {
-              const dbPromise = await clientPromise;
-              const db = dbPromise.db("test");
+        //     // Check if the user object exists, which indicates a new sign-in
+        //     if (user) {
+        //       const dbPromise = await clientPromise;
+        //       const db = dbPromise.db("test");
           
-              // Fetch user details from the database
-              const userDetails = await db.collection('users').findOne({ email: user.email });
+        //       // Fetch user details from the database
+        //       const userDetails = await db.collection('users').findOne({ email: user.email });
             
-              // Add user details to the token
-              if (userDetails) {
-                token.user = userDetails;
-                console.log("New Token:", token)
-              }
-            }
+        //       // Add user details to the token
+        //       if (userDetails) {
+        //         token.user = userDetails;
+        //         console.log("New Token:", token)
+        //       }
+        //     }
           
-            return token;
+        //     return token;
+        // },
+        // async session({ session, token } : { session: any, token: any }) {
+        //     console.log("Session", session);
+        //     console.log("Token", token);
+          
+        //     // Use the user details from the token
+        //     if (token.user) {
+        //       session.user = token.user;
+        //     }
+          
+        //     return session;
+        // }          
+        async jwt({ token, user } : { token: any, user: any }) {
+            console.log("JWT", token, user);
+            user && (token.user = user)
+            return token
         },
         async session({ session, token } : { session: any, token: any }) {
-            console.log("Session", session);
-            console.log("Token", token);
-          
-            // Use the user details from the token
-            if (token.user) {
-              session.user = token.user;
-            }
-          
-            return session;
-        }          
-        // async jwt({ token, user }) {
-        //     console.log("JWT", token, user);
-        //     user && (token.user = user)
-        //     return token
-        // },
-        // async session({ session, token, user }) {
-        //   console.log("Session", session)
-        //   console.log("Token", token)
-        //   console.log("User", user)
+          console.log("Session", session)
+          console.log("Token", token)
 
-        //   const dbPromise = await clientPromise;
-        //   const db = dbPromise.db("test");
+          const dbPromise = await clientPromise;
+          const db = dbPromise.db("test");
 
-        //   // Here, you can use either the token's userId or email to fetch the user from the database
-        //   const userDetails = await db.collection('users').findOne({ email: token.email });
+          // Here, you can use either the token's userId or email to fetch the user from the database
+          const userDetails = await db.collection('users').findOne({ email: token.email });
         
-        //   console.log("User from MongoDB", userDetails);
+          console.log("User from MongoDB", userDetails);
 
-        //   if (userDetails) {
-        //       // Augment the session object with user details from the database -> add new values if not present in session object, but don't overwrite existing values
-        //       session.user = userDetails;
-        //   }
+          if (userDetails) {
+              // Augment the session object with user details from the database -> add new values if not present in session object, but don't overwrite existing values
+              session.user = userDetails;
+          }
 
-        //   return session;
-        // }
+          return session;
+        }
     },
     pages: {
         signIn: '/signin'
