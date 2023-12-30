@@ -1,5 +1,5 @@
 {
-  "name": "folio_landing",
+  "name": "simple-next",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -8,39 +8,52 @@
     "start": "next start",
     "lint": "next lint"
   },
+  "overrides": {
+    "next-contentlayer": {
+      "next": "$next"
+    }
+  },
   "dependencies": {
-    "@dqbd/tiktoken": "^1.0.7",
-    "@headlessui/react": "^1.7.14",
-    "@react-pdf/renderer": "^3.1.13",
-    "@types/node": "^20.1.0",
-    "@types/react": "^18.2.5",
-    "@types/react-dom": "^18.2.4",
+    "@auth/mongodb-adapter": "^2.0.10",
+    "@aws-sdk/client-ses": "^3.481.0",
+    "@headlessui/react": "^1.7.17",
+    "@react-email/components": "0.0.12",
+    "@react-email/render": "^0.0.10",
+    "@types/node": "^20.10.4",
+    "@types/react": "^18.2.42",
+    "@types/react-dom": "^18.2.17",
     "aos": "^3.0.0-beta.6",
+    "clsx": "^2.0.0",
+    "contentlayer": "^0.3.2",
     "date-fns": "^2.30.0",
-    "dotenv": "^16.3.1",
-    "encoding": "^0.1.13",
-    "next": "^13.4.1",
-    "next-contentlayer": "^0.3.2",
-    "openai": "^4.12.1",
-    "pdfjs-dist": "^3.11.174",
+    "next": "^14.0.3",
+    "next-contentlayer": "^0.3.4",
+    "next-themes": "^0.2.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-pdf": "^7.5.0",
-    "react-spinners": "^0.13.8",
-    "rehype-slug": "^5.1.0",
-    "supertest": "^6.3.3",
-    "typescript": "^5.0.4"
+    "rehype-slug": "^6.0.0",
+    "simple-next": "link:",
+    "typescript": "^5.3.3"
   },
   "devDependencies": {
-    "@tailwindcss/forms": "^0.5.3",
-    "@tailwindcss/typography": "^0.5.9",
-    "@types/aos": "^3.0.4",
-    "autoprefixer": "^10.4.14",
-    "contentlayer": "^0.3.4",
-    "docx": "^8.2.3",
-    "mammoth": "^1.6.0",
-    "postcss": "^8.4.23",
-    "sharp": "^0.32.6",
-    "tailwindcss": "^3.3.2"
+    "@nextui-org/react": "^2.2.9",
+    "@tailwindcss/forms": "^0.5.7",
+    "@tailwindcss/typography": "^0.5.10",
+    "@types/aos": "^3.0.7",
+    "@types/bcryptjs": "^2.4.6",
+    "@types/jsonwebtoken": "^9.0.5",
+    "@types/next-auth": "^3.15.0",
+    "@types/nodemailer": "^6.4.14",
+    "autoprefixer": "^10.4.16",
+    "aws-sdk": "^2.1527.0",
+    "bcryptjs": "^2.4.3",
+    "framer-motion": "^10.16.16",
+    "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.3.0",
+    "next-auth": "^4.24.5",
+    "nodemailer": "^6.9.7",
+    "postcss": "^8.4.32",
+    "react-email": "^1.10.0",
+    "tailwindcss": "^3.3.6"
   }
 }

@@ -36,10 +36,4 @@ yarn-error.log*
 next-env.d.ts
 
 # contentlayer
-# .contentlayer
-.env
-
-package-lock.json
-
-# Ignore tests for building docx files
-app/api/build_docx/route.ts
+.contentlayer

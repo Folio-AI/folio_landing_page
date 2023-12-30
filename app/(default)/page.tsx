@@ -1,6 +1,6 @@
 export const metadata = {
-  title: 'Folio AI',
-  description: 'Your AI-powered personal career management copilot.',
+  title: 'Home - Simple',
+  description: 'Page description',
 }
 
 import Hero from '@/components/hero-home'
@@ -14,11 +14,11 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <Features />
-      {/* <FeaturesBlocks />
+      {/* <Features />
+      <FeaturesBlocks />
       <FeaturesWorld />
-      <News /> */}
-      <Cta />
+      <News />
+      <Cta /> */}
     </>
   )
 }
