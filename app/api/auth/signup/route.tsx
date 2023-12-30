@@ -14,6 +14,13 @@ export async function POST(request: Request) {
     try {
       const reqBody = await request.json();
       const { firstName, lastName, email, password } = reqBody;
+      // Extract the host from the request headers
+      const host = request.headers.get('host');
+
+      // Determine the protocol (http or https)
+      const protocol = request.headers.get('x-forwarded-proto') || 'http';
+
+      const baseUrl = `${protocol}://${host}`;
   
       const db = (await clientPromise).db('test');
   
@@ -41,7 +48,7 @@ export async function POST(request: Request) {
         password: hashedPassword,
         verificationToken,
         verificationExpires: new Date(Date.now() + 86400000), // 1 day in milliseconds
-        verified: false
+        isVerified: false
       });
       
       // AWS SES Setup
@@ -51,7 +58,7 @@ export async function POST(request: Request) {
         region: process.env.AWS_REGION
       });
 
-      const emailHtml = render(<VerifyEmail firstName={firstName} inviteLink={`http://localhost:3000/api/auth/verify?token=${verificationToken}`} />);
+      const emailHtml = render(<VerifyEmail firstName={firstName} inviteLink={`${baseUrl}/api/auth/verify?token=${verificationToken}`} />);
 
       // Send verification email
       const params = {
