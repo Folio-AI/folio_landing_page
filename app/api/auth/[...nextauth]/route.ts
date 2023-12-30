@@ -125,6 +125,8 @@ const authOptions = {
                     });
 
                     if (!existingLinkedAccount) {
+                        console.log("Existing account:", existingLinkedAccount);
+
                         // Link the accounts
                         await db.collection('accounts').insertOne({
                             userId: existingUser.id,
@@ -133,7 +135,7 @@ const authOptions = {
                     }     
                 }              
 
-                return existingUser;
+                return true;
             } else {
                 // Create a new user in users collection using OAuth Profile info
                 const newUser = await db.collection('users').insertOne({
@@ -188,17 +190,17 @@ const authOptions = {
           
             return token;
         },
-        async session({ session, token } : { session: any, token: any }) {
-            console.log("Session", session);
-            console.log("Token", token);
+        // async session({ session, token } : { session: any, token: any }) {
+        //     console.log("Session", session);
+        //     console.log("Token", token);
           
-            // Use the user details from the token
-            if (token.user) {
-              session.user = token.user;
-            }
+        //     // Use the user details from the token
+        //     if (token.user) {
+        //       session.user = token.user;
+        //     }
           
-            return session;
-        }          
+        //     return session;
+        // }          
         // async jwt({ token, user } : { token: any, user: any }) {
         //     console.log("JWT", token, user);
         //     user && (token.user = user)
