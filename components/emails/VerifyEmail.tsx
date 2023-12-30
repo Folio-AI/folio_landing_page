@@ -58,10 +58,10 @@ export const VerifyEmail = ({
               <strong>Confirm your account with Folio AI</strong>
             </Heading>
             <Text className="text-black text-[14px] leading-[24px]">
-              Hey {firstName},
+              Hey {firstName}!
             </Text>
             <Text className="text-black text-[14px] leading-[24px]">
-              Click the button below to verify your email and confirm your account with Folio AI.
+              We're so excited to have you onboard with Folio. Before you continue, click the button below to verify your email and start applying to jobs!
               {/* <strong>bukinoshita</strong> (
               <Link
                 href={`mailto:${invitedByEmail}`}

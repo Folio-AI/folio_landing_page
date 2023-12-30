@@ -9,15 +9,12 @@ import React from 'react';
 import { Switch, Button } from "@nextui-org/react";
 
 export default function Dashboard() {
-    const { data: session } = useSession({
+    const { data: session, status } = useSession({
         required: true,
         onUnauthenticated() {
           redirect('/');
         }
     });
-
-    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-    const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
     return (
         <div className="flex h-screen">

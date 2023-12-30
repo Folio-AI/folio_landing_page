@@ -14,11 +14,11 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <Features />
+      {/* <Features />
       <FeaturesBlocks />
       <FeaturesWorld />
       <News />
-      <Cta />
+      <Cta /> */}
     </>
   )
 }

@@ -55,13 +55,13 @@ export const SidebarWrapper = () => {
                 isActive={pathname === "/dashboard/resume-builder"}
                 title="Resume Builder"
                 icon={<DevIcon />}
-                href="accounts"
+                href=""
               />
               <SidebarItem
                 isActive={pathname === "/dashboard/jobs"}
                 title="Your Jobs"
                 icon={<ProductsIcon />}
-                href="accounts"
+                href=""
               />
               {/* <SidebarItem
                 isActive={pathname === "/payments"}
@@ -92,9 +92,16 @@ export const SidebarWrapper = () => {
 
             <SidebarMenu title="General">
               <SidebarItem
+                isActive={pathname === "/dashboard/linked-accounts"}
+                title="Linked Accounts"
+                icon={<CustomersIcon />}
+                href="/dashboard/linked-accounts"
+              />
+              <SidebarItem
                 isActive={pathname === "/dashboard/profile"}
                 title="Profile"
                 icon={<AccountsIcon />}
+                href="/dashboard/profile"
               />
               {/* <SidebarItem
                 isActive={pathname === "/view"}
@@ -117,7 +124,7 @@ export const SidebarWrapper = () => {
             </SidebarMenu> */}
           </div>
           <div className={Sidebar.Footer()}>
-            <Tooltip content={"Settings"} color="primary">
+            {/* <Tooltip content={"Settings"} color="primary">
               <div className="max-w-fit">
                 <SettingsIcon />
               </div>
@@ -126,7 +133,7 @@ export const SidebarWrapper = () => {
               <div className="max-w-fit">
                 <FilterIcon />
               </div>
-            </Tooltip>
+            </Tooltip> */}
             {/* <Tooltip content={"Profile"} color="primary">
               <Avatar
                 src="https://i.pravatar.cc/150?u=a042581f4e29026704d"

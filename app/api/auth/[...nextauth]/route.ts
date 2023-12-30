@@ -6,11 +6,16 @@ import GoogleProvider from 'next-auth/providers/google';
 import LinkedInProvider from 'next-auth/providers/linkedin';
 
 import clientPromise from "@/lib/mongodb"
-// import { MongoDBAdapter } from "@auth/mongodb-adapter"
+import { MongoDBAdapter } from "@auth/mongodb-adapter"
 
 import bcrypt from 'bcryptjs';
 
 export const authOptions = {
+    // adapter: MongoDBAdapter(clientPromise),
+    session: {
+        // Use database sessions instead of JWT
+        strategy: "jwt"
+    },
     secret: process.env.NEXTAUTH_SECRET,
     providers: [
         CredentialsProvider({
@@ -135,11 +140,6 @@ export const authOptions = {
                 return true;
             }
         },
-        session: {
-            // Set to jwt in order to CredentialsProvider works properly
-            strategy: 'jwt'
-        },
-        debug: process.env.NODE_ENV === 'development',
         async redirect({ url, baseUrl } : { url: string, baseUrl: string }) {
             console.log("Redirecting", url, baseUrl);
 
@@ -156,26 +156,66 @@ export const authOptions = {
             // For other cases, return to the passed URL
             return url;
         },
-        async session({ session, token, user }) {
-          console.log("Session", session)
-          console.log("Token", token)
-          console.log("User", user)
+        async jwt({ token, user }) {
+            console.log("JWT", token, user);
+          
+            // Check if the user object exists, which indicates a new sign-in
+            if (user) {
+              const dbPromise = await clientPromise;
+              const db = dbPromise.db("test");
+          
+              // Fetch user details from the database
+              const userDetails = await db.collection('users').findOne({ email: user.email });
+          
+              // Add user details to the token
+              if (userDetails) {
+                token.user = userDetails;
+              }
+            }
+          
+            return token;
+        },
+        async session({ session, token }) {
+            console.log("Session", session);
+            console.log("Token", token);
+          
+            // Use the user details from the token
+            if (token.user) {
+              session.user = token.user;
+            }
+          
+            return session;
+        }          
+        // async jwt({ token, user }) {
+        //     console.log("JWT", token, user);
+        //     user && (token.user = user)
+        //     return token
+        // },
+        // async session({ session, token, user }) {
+        //   console.log("Session", session)
+        //   console.log("Token", token)
+        //   console.log("User", user)
 
-          const dbPromise = await clientPromise;
-          const db = dbPromise.db("test");
+        //   const dbPromise = await clientPromise;
+        //   const db = dbPromise.db("test");
 
-          // Here, you can use either the token's userId or email to fetch the user from the database
-          const userDetails = await db.collection('users').findOne({ email: token.email });
+        //   // Here, you can use either the token's userId or email to fetch the user from the database
+        //   const userDetails = await db.collection('users').findOne({ email: token.email });
+        
+        //   console.log("User from MongoDB", userDetails);
 
-          if (userDetails) {
-              // Augment the session object with user details from the database
-              session.user = userDetails;
-          }
+        //   if (userDetails) {
+        //       // Augment the session object with user details from the database -> add new values if not present in session object, but don't overwrite existing values
+        //       session.user = userDetails;
+        //   }
 
-          return session;
-        }
+        //   return session;
+        // }
     },
+    pages: {
+        signIn: '/signin'
+    }
 }
 
-export const handler = NextAuth(authOptions);
+const handler = NextAuth(authOptions);
 export {handler as GET, handler as POST};
