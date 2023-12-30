@@ -9,14 +9,8 @@ import {
 } from "@nextui-org/react";
 
 import React from "react";
-import { useState, useEffect } from "react";
-
-import { DarkModeSwitch } from "./darkmodeswitch";
 
 import { useSession, signOut } from 'next-auth/react';
-
-import { redirect }  from 'next/navigation';
-import Loading from '@/components/utils/loading';
 
 export const UserDropdown = () => {
   const { data: session, status } = useSession({
