@@ -74,7 +74,10 @@ export default async function RootLayout({
     <html lang="en" className="light">
       <body className={`${inter.variable} font-inter antialiased bg-white text-gray-900 tracking-tight`}>
         <div className="flex flex-col min-h-screen overflow-hidden supports-[overflow:clip]:overflow-clip">
-           <SessionProvider session={session}>
+           <SessionProvider 
+            session={session}
+            // Re-fetches session when window is focused
+            refetchOnWindowFocus={true}>
               {/* <ThemeProvider defaultTheme="dark" attribute="class"> */}
                 <NextUIProvider>
                   {children}

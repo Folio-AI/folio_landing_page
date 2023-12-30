@@ -169,7 +169,7 @@ const authOptions = {
             // For other cases, return to the passed URL
             return url;
         },
-        async jwt({ token, user } : { token: any, user: any }) {
+        async jwt({ token, user, profile } : { token: any, user: any, profile? : any }) {
             console.log("JWT Token", token)
             console.log("JWT User", user);
           
@@ -190,17 +190,18 @@ const authOptions = {
           
             return token;
         },
-        // async session({ session, token } : { session: any, token: any }) {
-        //     console.log("Session", session);
-        //     console.log("Token", token);
+        async session({ session, token, user } : { session: any, token: any, user: any }) {
+            console.log("Session", session);
+            console.log("Token", token);
+            console.log("User", user)
           
-        //     // Use the user details from the token
-        //     if (token.user) {
-        //       session.user = token.user;
-        //     }
+            // Use the user details from the token
+            if (token.user) {
+              session.user = token.user;
+            }
           
-        //     return session;
-        // }          
+            return session;
+        }          
         // async jwt({ token, user } : { token: any, user: any }) {
         //     console.log("JWT", token, user);
         //     user && (token.user = user)
