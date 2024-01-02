@@ -52,3 +52,5 @@
 //   maximumSignificantDigits: 3,
 //   notation: 'compact',
 // }).format(value)
+
+export const defaultAvatarURL = '/images/default_avatar.png';

@@ -14,6 +14,8 @@ import React from "react";
 import { useSession, signOut } from 'next-auth/react';
 import { redirect } from 'next/navigation';
 
+import { defaultAvatarURL } from "../utils/utils";
+
 export const UserDropdown = () => {
   const { data: session, status } = useSession({
     required: true,
@@ -30,7 +32,7 @@ export const UserDropdown = () => {
               as="button"
               color="secondary"
               size="md"
-              src={session?.user?.image || "https://i.pravatar.cc/150?u=a042581f4e29026704d"}
+              src={session?.user?.image || defaultAvatarURL}
               // src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
             />
         </DropdownTrigger>

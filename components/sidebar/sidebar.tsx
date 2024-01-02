@@ -55,7 +55,7 @@ export const SidebarWrapper = () => {
                 isActive={pathname === "/dashboard/resume-builder"}
                 title="Resume Builder"
                 icon={<DevIcon />}
-                href=""
+                href="/dashboard/resume-builder"
               />
               <SidebarItem
                 isActive={pathname === "/dashboard/jobs"}
