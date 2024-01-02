@@ -9,7 +9,7 @@ import { VerifyEmail } from '@/components/emails/VerifyEmail';
 
 import { SES } from 'aws-sdk';
 
-async function sendVerificationEmail({ firstName, email, baseUrl, verificationToken }: { firstName: string, email: string, baseUrl: string, verificationToken: string }) {
+async function sendVerificationEmail(firstName: string, email: string, baseUrl: string, verificationToken: string) {
   const ses = new SES({
   accessKeyId: process.env.AWS_SES_ACCESS_KEY,
   secretAccessKey: process.env.AWS_SES_ACCESS_SECRET,
