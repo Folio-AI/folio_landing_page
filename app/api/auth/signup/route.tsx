@@ -45,10 +45,24 @@ export async function POST(request: Request) {
       // Insert new user with verification token and its expiry
       await db.collection('users').insertOne({
         email,
+        name: {
+          firstName: firstName,
+          lastName: lastName
+        },
+        address: "",
         password: hashedPassword,
         verificationToken,
         verificationExpires: new Date(Date.now() + 86400000), // 1 day in milliseconds
-        isVerified: false
+        verified: false,
+        phoneNumbers: [],
+        skills: [],
+        achievements: [],
+        links: {
+          personalWebsite: "",
+          github: "",
+          linkedin: "",
+          devpost: ""
+        }
       });
       
       // AWS SES Setup
