@@ -402,7 +402,7 @@ async function extractKeywordsFromJobPosting(jobPostingText: string, temp: numbe
  * @param jobPostingText The job posting text to tailor the resume for.
  * @returns The tailored resume text.
  */
-async function tailorResumeFromJobPosting(resumeJSON: string, jobPostingText: string, model: "gpt-3.5-turbo-instruct", temp: number = 0.8) {
+async function tailorResumeFromJobPosting(resumeJSON: string, jobPostingText: string, model: string = "gpt-3.5-turbo-instruct", temp: number = 0.8) {
   console.log("Tailoring resume to job posting...");
 
   const enc = encoding_for_model("gpt-3.5-turbo");
@@ -425,6 +425,7 @@ async function tailorResumeFromJobPosting(resumeJSON: string, jobPostingText: st
   });
 
   return response.choices[0].text;
+
   // const response = await getOpenAIChatCompletion({
   //   model: "gpt-3.5-turbo",
   //   prompt: prompt,
@@ -499,7 +500,7 @@ class ResumeParserError extends Error {
   }
 }
 
-async function tailorResumePipeline(resumeRawText: string, jobPostingText: string) {
+async function tailorResumePipeline(resumeRawText: string, jobPostingText: string, model: string = "gpt-3.5-turbo") {
   const encoding = encoding_for_model("gpt-3.5-turbo");
 
   // Raise Typescript exception if resume is over 4000 tokens long
@@ -533,7 +534,7 @@ async function tailorResumePipeline(resumeRawText: string, jobPostingText: strin
   // Else tailor resume from keywords
   // const keywords = await extractKeywordsFromJobPosting(jobPostingText);
   // const tailoredResume = await tailorResumeFromKeywords(resumeJSON, keywords);
-  const tailoredResume = await tailorResumeFromJobPosting(resumeJSON, jobPostingText, "gpt-3.5-turbo-instruct", 1);
+  const tailoredResume = await tailorResumeFromJobPosting(resumeJSON, jobPostingText, model, 1);
 
   if (!isValidJSON(resumeJSON)) {
     throw new ResumeParserError({

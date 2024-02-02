@@ -7,6 +7,8 @@ import 'aos/dist/aos.css'
 
 import Footer from '@/components/ui/footer'
 
+import {NextUIProvider} from "@nextui-org/react";
+
 export default function DefaultLayout({
   children,
 }: {
@@ -24,13 +26,15 @@ export default function DefaultLayout({
 
   return (
     <>
-      <main className="grow">
+      <NextUIProvider>
+        <main className="grow">
 
-        {children}
+          {children}
 
-      </main>
+        </main>
 
-      <Footer />
+        <Footer />
+      </NextUIProvider>
     </>
   )
 }

@@ -1,147 +1,70 @@
-'use client'
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { FaTrash, FaArrowUp, FaArrowDown, FaPlus } from 'react-icons/fa';
 
-interface Experience {
-    company: string;
-    title: string;
-    start: string;
-    end: string;
-    location: string;
-    description: string[];
-}
+const ResumeEditor = () => {
+  const [experiences, setExperiences] = useState([
+    { id: 1, company: 'Khan Academy', title: 'Software Engineer', date: 'Jun 2022 - Present', description: [''] },
+    // Add more experiences as needed
+  ]);
 
-interface Project {
-    title: string;
-    start: string;
-    end: string;
-    company: string;
-    description: string[];
-}
-
-interface ResumeData {
-    Experience: Experience[];
-    Projects: Project[];
-}
-
-interface Bio {
-    name: string;
-    address: string;
-    phone: string;
-    email: string;
-    website: string;
-  }
-  
-interface Education {
-    institution: string;
-    degree: string;
-    major: string;
-    minor: string;
-    start: string;
-    end: string;
-    location: string;
-    relevantCoursework: string[];
-}
-  
-interface CandidateInfo {
-    Bio: Bio;
-    Education: Education;
-}
-
-interface Props {
-    resumeData: ResumeData;
-    updateSharedState: (newState: any) => void;
-}
-
-const ResumeEditor: React.FC<Props> = ({ resumeData, updateSharedState }) => {
-    const [localResumeData, setLocalResumeData] = useState<ResumeData>(resumeData);
-
-    useEffect(() => {
-        updateSharedState(localResumeData);
-    }, [localResumeData, updateSharedState]);
-
-    const adjustTextareaHeight = () => {
-        const textareas = document.querySelectorAll('textarea');
-        textareas.forEach(textarea => {
-            textarea.style.height = 'auto';
-            textarea.style.height = textarea.scrollHeight + 'px';
-        });
+  // Function to handle addition of new experience
+  const handleAddExperience = () => {
+    const newExperience = {
+      id: experiences.length + 1,
+      company: '',
+      title: '',
+      date: '',
+      description: [''],
     };
+    setExperiences([...experiences, newExperience]);
+  };
 
-    useEffect(() => {
-        adjustTextareaHeight();
-    }, [localResumeData]);
+  // Function to handle deletion of an experience
+  const handleDeleteExperience = (id) => {
+    setExperiences(experiences.filter((experience) => experience.id !== id));
+  };
 
-    const updateDescription = (
-        section: keyof ResumeData,
-        index: number,
-        descriptionIndex: number,
-        newValue: string
-    ) => {
-        const updatedSection = [...localResumeData[section]];
-        updatedSection[index].description[descriptionIndex] = newValue;
+  // Function to handle moving experiences up or down
+  const moveExperience = (index, direction) => {
+    const newExperiences = [...experiences];
+    if (direction === 'up' && index > 0) {
+      [newExperiences[index], newExperiences[index - 1]] = [newExperiences[index - 1], newExperiences[index]];
+    } else if (direction === 'down' && index < newExperiences.length - 1) {
+      [newExperiences[index], newExperiences[index + 1]] = [newExperiences[index + 1], newExperiences[index]];
+    }
+    setExperiences(newExperiences);
+  };
 
-        const updatedResumeData = {
-            ...localResumeData,
-            [section]: updatedSection,
-        };
-
-        setLocalResumeData(updatedResumeData);
-    };
-
-    const handleInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-        const textarea = e.target;
-        textarea.style.height = 'auto';
-        textarea.style.height = textarea.scrollHeight + 'px';
-    };
-
-    return (
-        <div className="space-y-4 p-5">
-            {(['Experience', 'Projects'] as Array<keyof ResumeData>).map((section) => (
-                <div key={section} className="p-6 rounded-md shadow-md border border-gray-300">
-                    <h2 className="font-bold text-black text-xl mb-4">{section}</h2>
-                    <div className="space-y-2">
-                        {localResumeData[section].map((item, index) => (
-                            <div key={index} className="p-6 border-teal-500 border rounded-md mb-4 shadow-md">
-                                <h3 className="font-bold text-lg text-black">{item.title}</h3>
-                                <h3 className="text-sm italic mb-3">{item.company}</h3>
-                                {item.description.map((desc, descIndex) => (
-                                    <div key={descIndex} style={{ display: 'flex', alignItems: 'center' }}>
-
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 mr-3 cursor-pointer text-teal-500 hover:text-teal-800">
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 12h16.5m-16.5 3.75h16.5M3.75 19.5h16.5M5.625 4.5h12.75a1.875 1.875 0 010 3.75H5.625a1.875 1.875 0 010-3.75z" />
-                                    </svg>
-
-                                    <textarea 
-                                        value={desc} 
-                                        onChange={(e) => updateDescription(section, index, descIndex, e.target.value)}
-                                        onInput={handleInput}
-                                        className="text-sm p-2 mb-3 rounded-md text-black border border-gray-300 w-full shadow-md focus:ring-green-400"
-                                        style={{ overflow: 'hidden', resize: 'none', flex: '1' }}
-                                    />
-                                    <svg 
-                                        xmlns="http://www.w3.org/2000/svg" 
-                                        fill="none" 
-                                        viewBox="0 0 24 24" 
-                                        strokeWidth={1.5} 
-                                        stroke="currentColor" 
-                                        className="w-5 h-5 cursor-pointer text-teal-500 hover:text-teal-800"
-                                        style={{ marginLeft: '8px' }} // Optional: Add some space between textarea and SVG
-                                    >
-                                        <path className="" strokeLinecap="round" strokeLinejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
-                                    </svg>
-                                </div>
-                                ))}
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 cursor-pointer text-teal-500 hover:text-teal-800">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            ))}
+  return (
+    <div className="space-y-6">
+      <h2 className="text-2xl font-bold mb-4">WORK EXPERIENCE</h2>
+      {experiences.map((experience, index) => (
+        <div key={experience.id} className="border rounded-lg p-4">
+          <div className="space-y-4">
+            <div className="flex items-center space-x-2">
+              <input type="text" placeholder="Company" value={experience.company} className="border rounded w-full p-2" />
+            </div>
+            <div className="flex items-center space-x-2">
+              <input type="text" placeholder="Job Title" value={experience.title} className="border rounded w-full p-2" />
+            </div>
+            <div className="flex items-center space-x-2">
+              <input type="text" placeholder="Date" value={experience.date} className="border rounded w-full p-2" />
+            </div>
+            <textarea placeholder="Description" className="border rounded w-full p-2"></textarea>
+          </div>
+          <div className="flex items-center justify-between mt-4">
+            <FaArrowUp className="text-gray-600 cursor-pointer" onClick={() => moveExperience(index, 'up')} />
+            <FaArrowDown className="text-gray-600 cursor-pointer" onClick={() => moveExperience(index, 'down')} />
+            <FaTrash className="text-red-600 cursor-pointer" onClick={() => handleDeleteExperience(experience.id)} />
+          </div>
         </div>
-    );
+      ))}
+      <button onClick={handleAddExperience} className="flex items-center justify-center bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
+        <FaPlus className="mr-2" />
+        Add Job
+      </button>
+    </div>
+  );
 };
 
 export default ResumeEditor;
