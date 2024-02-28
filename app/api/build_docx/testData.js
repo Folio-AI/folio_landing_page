@@ -4,8 +4,10 @@ const exampleData =
       {
         "company": "Cedar Inc.",
         "title": "Developer Internship",
-        "start": "May 2022",
-        "end": "August 2022",
+        "start_month": "May",
+        "start_year": 2022,
+        "end_month": "August",
+        "end_year": 2022,
         "location": "New York, NY",
         "description": [
           "Demonstrated proficiency in Python while developing for a fast-paced start-up in the financial technology sector, focusing on the efficiency and scalability of distributed systems",
@@ -16,8 +18,10 @@ const exampleData =
       {
         "company": "Neck App",
         "title": "Developer Internship",
-        "start": "May 2021",
-        "end": "September 2021",
+        "start_month": "May",
+        "start_year": 2021,
+        "end_month": "September",
+        "end_year": 2021,
         "location": "New York, NY",
         "description": [
           "Developed a referral program for a financial services firm application, enhancing network shareability by 100% using Javascript and lower level programming",
@@ -68,8 +72,10 @@ const candidateInfo = {
         "degree": "Bachelor of Arts",
         "major": "Computer Science",
         "minor": "Data Science",
-        "start": "August 2019",
-        "end": "May 2023",
+        "start_month": "August",
+        "start_year": 2019,
+        "end_month": "May",
+        "end_year": 2023,
         "location": "Berkeley, CA",
         "relevantCoursework": [
             "Data Structures",
